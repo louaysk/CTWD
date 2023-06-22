@@ -1,0 +1,43 @@
+{
+    "name": "Form",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+            "type": "LinkedServiceReference",
+            "parameters": {
+                "DBName": "DWTC_DWH"
+            }
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [
+            {
+                "name": "Form_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "FormName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "EventName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Event_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "Asset_ID",
+                "type": "nvarchar"
+            }
+        ],
+        "typeProperties": {
+            "schema": "EM_DWH",
+            "table": "DIM_FORM"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

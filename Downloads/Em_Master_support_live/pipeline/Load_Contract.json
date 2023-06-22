@@ -1,0 +1,46 @@
+{
+    "name": "Load_Contract",
+    "properties": {
+        "activities": [
+            {
+                "name": "Ods_Contract",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "load_Contracts_CRM",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "Dim_Contract",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Ods_Contract",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "DIM_CONTRACT",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            }
+        ],
+        "folder": {
+            "name": "EM/EM Master"
+        },
+        "annotations": [],
+        "lastPublishTime": "2023-06-13T00:54:40Z"
+    },
+    "type": "Microsoft.Synapse/workspaces/pipelines"
+}

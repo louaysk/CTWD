@@ -1,0 +1,66 @@
+{
+    "name": "Load_Data_Standard",
+    "properties": {
+        "activities": [
+            {
+                "name": "Load_ODS_Data_Standard",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Load Data Standard",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "DIM_Qmaster",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Load_ODS_Data_Standard",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "DIM_QMASTER",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "Dim_Country",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Load_ODS_Data_Standard",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "DIM_COUNTRY",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            }
+        ],
+        "folder": {
+            "name": "EM/EM Master"
+        },
+        "annotations": [],
+        "lastPublishTime": "2023-06-13T00:54:47Z"
+    },
+    "type": "Microsoft.Synapse/workspaces/pipelines"
+}

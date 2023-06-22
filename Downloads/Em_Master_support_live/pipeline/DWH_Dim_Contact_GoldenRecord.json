@@ -1,0 +1,208 @@
+{
+    "name": "DWH_Dim_Contact_GoldenRecord",
+    "properties": {
+        "activities": [
+            {
+                "name": "All Contacts_NonCRm_Contacts",
+                "type": "ExecuteDataFlow",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 2,
+                    "retryIntervalInSeconds": 60,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "dataflow": {
+                        "referenceName": "Dataflow46",
+                        "type": "DataFlowReference"
+                    },
+                    "staging": {
+                        "linkedService": {
+                            "referenceName": "dwtc-bi-WorkspaceDefaultStorage",
+                            "type": "LinkedServiceReference"
+                        },
+                        "folderPath": "dwtcfilestest/stg strg"
+                    },
+                    "compute": {
+                        "coreCount": 32,
+                        "computeType": "MemoryOptimized"
+                    },
+                    "traceLevel": "Fine",
+                    "sourceStagingConcurrency": 1,
+                    "continueOnError": true
+                }
+            },
+            {
+                "name": "Duplicateded_Contacts",
+                "type": "ExecuteDataFlow",
+                "dependsOn": [
+                    {
+                        "activity": "Wait2",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 2,
+                    "retryIntervalInSeconds": 60,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "dataflow": {
+                        "referenceName": "Dataflow47",
+                        "type": "DataFlowReference"
+                    },
+                    "staging": {
+                        "linkedService": {
+                            "referenceName": "dwtc-bi-WorkspaceDefaultStorage",
+                            "type": "LinkedServiceReference"
+                        },
+                        "folderPath": "dwtcfilestest/stg strg"
+                    },
+                    "compute": {
+                        "coreCount": 32,
+                        "computeType": "MemoryOptimized"
+                    },
+                    "traceLevel": "Fine"
+                }
+            },
+            {
+                "name": "GoldenRecord Lookup",
+                "type": "ExecuteDataFlow",
+                "dependsOn": [
+                    {
+                        "activity": "Wait3",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 2,
+                    "retryIntervalInSeconds": 60,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "dataflow": {
+                        "referenceName": "Golden Record Lookup",
+                        "type": "DataFlowReference"
+                    },
+                    "staging": {
+                        "linkedService": {
+                            "referenceName": "dwtc-bi-WorkspaceDefaultStorage",
+                            "type": "LinkedServiceReference"
+                        },
+                        "folderPath": "dwtcfilestest/stg strg"
+                    },
+                    "compute": {
+                        "coreCount": 32,
+                        "computeType": "MemoryOptimized"
+                    },
+                    "traceLevel": "Fine"
+                }
+            },
+            {
+                "name": "Golden Record",
+                "type": "ExecuteDataFlow",
+                "dependsOn": [
+                    {
+                        "activity": "Wait1",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 3,
+                    "retryIntervalInSeconds": 60,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "dataflow": {
+                        "referenceName": "crm",
+                        "type": "DataFlowReference"
+                    },
+                    "staging": {
+                        "linkedService": {
+                            "referenceName": "dwtc-bi-WorkspaceDefaultStorage",
+                            "type": "LinkedServiceReference"
+                        },
+                        "folderPath": "dwtcfilestest/stg strg"
+                    },
+                    "compute": {
+                        "coreCount": 32,
+                        "computeType": "MemoryOptimized"
+                    },
+                    "traceLevel": "Fine"
+                }
+            },
+            {
+                "name": "Wait1",
+                "type": "Wait",
+                "dependsOn": [
+                    {
+                        "activity": "Duplicateded_Contacts",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "waitTimeInSeconds": 100
+                }
+            },
+            {
+                "name": "Wait2",
+                "type": "Wait",
+                "dependsOn": [
+                    {
+                        "activity": "All Contacts_NonCRm_Contacts",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "waitTimeInSeconds": 100
+                }
+            },
+            {
+                "name": "Wait3",
+                "type": "Wait",
+                "dependsOn": [
+                    {
+                        "activity": "Golden Record",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "waitTimeInSeconds": 100
+                }
+            }
+        ],
+        "folder": {
+            "name": "EM/DWH"
+        },
+        "annotations": [],
+        "lastPublishTime": "2023-06-16T11:49:21Z"
+    },
+    "type": "Microsoft.Synapse/workspaces/pipelines"
+}

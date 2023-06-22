@@ -1,0 +1,95 @@
+{
+    "name": "Dim_Campaign",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+            "type": "LinkedServiceReference",
+            "parameters": {
+                "DBName": "DWTC_DWH"
+            }
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [
+            {
+                "name": "Campaign_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "Event_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "ID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Name",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Campaign_Code",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Startdate",
+                "type": "date"
+            },
+            {
+                "name": "Instance",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Enddate",
+                "type": "date"
+            },
+            {
+                "name": "CampaignCategory",
+                "type": "nvarchar"
+            },
+            {
+                "name": "CurrentStatus",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Description",
+                "type": "nvarchar"
+            },
+            {
+                "name": "FolderId",
+                "type": "nvarchar"
+            },
+            {
+                "name": "EmailMarketingCampaign",
+                "type": "nvarchar"
+            },
+            {
+                "name": "UpdatedAt",
+                "type": "datetime",
+                "precision": 23,
+                "scale": 3
+            },
+            {
+                "name": "UpdatedBy",
+                "type": "nvarchar"
+            },
+            {
+                "name": "FirstActivation",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Execution_Date",
+                "type": "datetime",
+                "precision": 23,
+                "scale": 3
+            }
+        ],
+        "typeProperties": {
+            "schema": "EM_DWH",
+            "table": "DIM_CAMPAIGN"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

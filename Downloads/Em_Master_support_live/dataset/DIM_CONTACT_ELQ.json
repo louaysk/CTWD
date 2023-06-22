@@ -1,0 +1,141 @@
+{
+    "name": "DIM_CONTACT_ELQ",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+            "type": "LinkedServiceReference",
+            "parameters": {
+                "DBName": "DWTC_DWH"
+            }
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [
+            {
+                "name": "Contact_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "Address",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Age_Group",
+                "type": "nvarchar"
+            },
+            {
+                "name": "City",
+                "type": "nvarchar"
+            },
+            {
+                "name": "CompanyName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Country",
+                "type": "nvarchar"
+            },
+            {
+                "name": "DateCreated",
+                "type": "nvarchar"
+            },
+            {
+                "name": "DateModified",
+                "type": "nvarchar"
+            },
+            {
+                "name": "JobTitle",
+                "type": "nvarchar"
+            },
+            {
+                "name": "FullName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "FirstName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Job_Function",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Job_Role",
+                "type": "nvarchar"
+            },
+            {
+                "name": "LastName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "MobilePhone",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Nationality",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Region",
+                "type": "nvarchar"
+            },
+            {
+                "name": "SFDCContactID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Title",
+                "type": "nvarchar"
+            },
+            {
+                "name": "ContactIDExt",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Contact_Code",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Email",
+                "type": "nvarchar"
+            },
+            {
+                "name": "IsBounced",
+                "type": "nvarchar"
+            },
+            {
+                "name": "IsSubscribed",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Instance",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Contact_GR_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "Date_Execution",
+                "type": "datetime",
+                "precision": 23,
+                "scale": 3
+            },
+            {
+                "name": "GR_ID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "MobilePhone2",
+                "type": "nvarchar"
+            }
+        ],
+        "typeProperties": {
+            "schema": "EM_DWH",
+            "table": "DEV_CONTACT_ELQ"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

@@ -1,0 +1,100 @@
+{
+    "name": "Load_Company",
+    "properties": {
+        "activities": [
+            {
+                "name": "ODS_AccountCRM",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Load_Account_CRM",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "DimCompany",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "ODS_AccountCRM",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "DIM_COMPANY",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "DEV_Account_CRM",
+                "type": "ExecuteDataFlow",
+                "dependsOn": [
+                    {
+                        "activity": "Wait1",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "dataflow": {
+                        "referenceName": "Df_Load_Dim_Account",
+                        "type": "DataFlowReference"
+                    },
+                    "staging": {
+                        "linkedService": {
+                            "referenceName": "dwtc-bi-WorkspaceDefaultStorage",
+                            "type": "LinkedServiceReference"
+                        },
+                        "folderPath": "dwtcfilestest/Staging storage"
+                    },
+                    "compute": {
+                        "coreCount": 8,
+                        "computeType": "General"
+                    },
+                    "traceLevel": "Fine"
+                }
+            },
+            {
+                "name": "Wait1",
+                "type": "Wait",
+                "dependsOn": [
+                    {
+                        "activity": "DimCompany",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "waitTimeInSeconds": 100
+                }
+            }
+        ],
+        "folder": {
+            "name": "EM/EM Master"
+        },
+        "annotations": [],
+        "lastPublishTime": "2023-06-13T00:54:25Z"
+    },
+    "type": "Microsoft.Synapse/workspaces/pipelines"
+}

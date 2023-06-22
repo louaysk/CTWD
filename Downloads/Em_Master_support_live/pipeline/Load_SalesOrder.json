@@ -1,0 +1,46 @@
+{
+    "name": "Load_SalesOrder",
+    "properties": {
+        "activities": [
+            {
+                "name": "Ods_SalesOrder",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Load_SalesOrder_CRM",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "Fact_SalesOrder",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Ods_SalesOrder",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "FACT_SALESORDER",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            }
+        ],
+        "folder": {
+            "name": "EM/EM Master"
+        },
+        "annotations": [],
+        "lastPublishTime": "2023-06-13T00:55:36Z"
+    },
+    "type": "Microsoft.Synapse/workspaces/pipelines"
+}

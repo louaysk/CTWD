@@ -1,0 +1,46 @@
+{
+    "name": "Load_Proposal",
+    "properties": {
+        "activities": [
+            {
+                "name": "OdsProposal",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Load_Proposal_CRM",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "Dim_Proposal",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "OdsProposal",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "DIM_PROPOSAL",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            }
+        ],
+        "folder": {
+            "name": "EM/EM Master"
+        },
+        "annotations": [],
+        "lastPublishTime": "2023-06-13T00:55:28Z"
+    },
+    "type": "Microsoft.Synapse/workspaces/pipelines"
+}

@@ -1,0 +1,484 @@
+{
+    "name": "Em_Master",
+    "properties": {
+        "activities": [
+            {
+                "name": "load_Event",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Load_Event",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "Load Data Standard",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Load_Data_Standard",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "Load_Data_Registration",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "load_Event",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    },
+                    {
+                        "activity": "Load Data Standard",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Load_Registration_Files",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "Load_Campaign",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "load_Event",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Load_Campaign",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "Dev_Data_Research",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Load_Contact_Elq",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    },
+                    {
+                        "activity": "Load_Data_Registration",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Load_Data_Research",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "Load_Contact_Elq",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Fact_Campaign_Metrics",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Load_Contact_Elq",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "Load_Contact_CRM",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Load_Company",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Load_ContactCRM",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "Load_Company",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Dev_Data_Research",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Load_Company",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "Load_Lead",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Load_Contact_CRM",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "load_Lead",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "Load_Opportunity",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Dim_Contact_GR",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Load_Opportunity",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "Load_Proposal",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Load_Opportunity",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Load_Proposal",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "Load_Contract",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Load_Proposal",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Load_Contract",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "Load_SalesOrder",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Load_Contract",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Load_SalesOrder",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "Dim_Contact_GR",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Load_Lead",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Load_Contact_GR",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "Fact_VIsitor_Reg",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Dim_Contact_GR",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "FACT_VISITOR_REGISTRATION",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "Fact_Marketing_Preferences",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Dim_Contact_GR",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Fact_Marketing_Preferences",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "Fact_Dp_Member",
+                "type": "ExecuteDataFlow",
+                "dependsOn": [
+                    {
+                        "activity": "Dim_Contact_GR",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "dataflow": {
+                        "referenceName": "Load_DF_Fact_DPMember",
+                        "type": "DataFlowReference"
+                    },
+                    "staging": {
+                        "linkedService": {
+                            "referenceName": "dwtc-bi-WorkspaceDefaultStorage",
+                            "type": "LinkedServiceReference"
+                        },
+                        "folderPath": "dwtcfilestest/Staging storage"
+                    },
+                    "compute": {
+                        "coreCount": 8,
+                        "computeType": "General"
+                    },
+                    "traceLevel": "Fine"
+                }
+            },
+            {
+                "name": "Fact_Show_Preference",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "load_OrderProduct",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "FACT_SHOW_PREFERENCE",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "DimForm",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Load_Activity",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Dim_LoadForm",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "load_OrderProduct",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Load_SalesOrder",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Load_Product_order",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "Fact_Campaign_Metrics",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Load_Campaign",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Load_Campaign_Metrics",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "Load_Activity",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Load_Contact_Elq",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Load_Activity",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            }
+        ],
+        "variables": {
+            "xx": {
+                "type": "String"
+            },
+            "de": {
+                "type": "String"
+            },
+            "test": {
+                "type": "String",
+                "defaultValue": "\"\""
+            },
+            "test2": {
+                "type": "String"
+            }
+        },
+        "folder": {
+            "name": "EM/EM Master"
+        },
+        "annotations": [],
+        "lastPublishTime": "2023-06-19T09:34:14Z"
+    },
+    "type": "Microsoft.Synapse/workspaces/pipelines"
+}

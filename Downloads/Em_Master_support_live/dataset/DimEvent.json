@@ -1,0 +1,172 @@
+{
+    "name": "DimEvent",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+            "type": "LinkedServiceReference",
+            "parameters": {
+                "DBName": "DWTC_DWH"
+            }
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [
+            {
+                "name": "Event_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "EventID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "EventName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "ShowName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "ShowName2",
+                "type": "nvarchar"
+            },
+            {
+                "name": "TypeID",
+                "type": "bigint",
+                "precision": 19
+            },
+            {
+                "name": "EventStatus",
+                "type": "bigint",
+                "precision": 19
+            },
+            {
+                "name": "EventStartDate",
+                "type": "date"
+            },
+            {
+                "name": "ShellScheme",
+                "type": "decimal",
+                "precision": 38,
+                "scale": 2
+            },
+            {
+                "name": "SpecialStands",
+                "type": "decimal",
+                "precision": 38,
+                "scale": 2
+            },
+            {
+                "name": "OutdoorSpaceOnly",
+                "type": "decimal",
+                "precision": 38,
+                "scale": 2
+            },
+            {
+                "name": "SpaceOnlyAED",
+                "type": "decimal",
+                "precision": 38,
+                "scale": 2
+            },
+            {
+                "name": "ShellSchemeSqm",
+                "type": "decimal",
+                "precision": 38,
+                "scale": 2
+            },
+            {
+                "name": "SponsorshipAED",
+                "type": "decimal",
+                "precision": 38,
+                "scale": 2
+            },
+            {
+                "name": "CorporateDeck",
+                "type": "decimal",
+                "precision": 38,
+                "scale": 2
+            },
+            {
+                "name": "EventIDValue",
+                "type": "nvarchar"
+            },
+            {
+                "name": "ClusterName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Execution_Date",
+                "type": "datetime",
+                "precision": 23,
+                "scale": 3
+            },
+            {
+                "name": "PriceList",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Category",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Class",
+                "type": "nvarchar"
+            },
+            {
+                "name": "EventType",
+                "type": "nvarchar"
+            },
+            {
+                "name": "OrgName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "EventTeam",
+                "type": "nvarchar"
+            },
+            {
+                "name": "EventAdmin",
+                "type": "nvarchar"
+            },
+            {
+                "name": "ShowDirector",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Groupemailaddress",
+                "type": "nvarchar"
+            },
+            {
+                "name": "EBSEventID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Advance_pricecut_off_days",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Standard_price_cut_off_days",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Loyalty_product_cut_off_days",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Enable_audit_functionality",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Bulk_fulfill_order_flag",
+                "type": "nvarchar"
+            }
+        ],
+        "typeProperties": {
+            "schema": "EM_DWH",
+            "table": "DIM_EVENT"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

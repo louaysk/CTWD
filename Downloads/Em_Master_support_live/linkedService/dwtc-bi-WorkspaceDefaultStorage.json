@@ -1,0 +1,15 @@
+{
+    "name": "dwtc-bi-WorkspaceDefaultStorage",
+    "type": "Microsoft.Synapse/workspaces/linkedservices",
+    "properties": {
+        "typeProperties": {
+            "url": "https://dwtcdatalakeaccount.dfs.core.windows.net"
+        },
+        "type": "AzureBlobFS",
+        "connectVia": {
+            "referenceName": "AutoResolveIntegrationRuntime",
+            "type": "IntegrationRuntimeReference"
+        },
+        "annotations": []
+    }
+}

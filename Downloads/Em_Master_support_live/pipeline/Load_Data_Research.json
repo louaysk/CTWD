@@ -1,0 +1,46 @@
+{
+    "name": "Load_Data_Research",
+    "properties": {
+        "activities": [
+            {
+                "name": "LZ_Ods_Dim_Data_Research",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "LZ_Ods_Dim_Project",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Data Research",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "LZ_Ods_Dim_Project",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "DIM_PROJECT",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            }
+        ],
+        "folder": {
+            "name": "EM/EM Master"
+        },
+        "annotations": [],
+        "lastPublishTime": "2023-06-13T01:07:55Z"
+    },
+    "type": "Microsoft.Synapse/workspaces/pipelines"
+}

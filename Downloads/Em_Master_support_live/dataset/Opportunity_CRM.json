@@ -1,0 +1,153 @@
+{
+    "name": "Opportunity_CRM",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+            "type": "LinkedServiceReference",
+            "parameters": {
+                "DBName": "DWTC_DWH"
+            }
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [
+            {
+                "name": "dwtc_oppsourcename",
+                "type": "nvarchar"
+            },
+            {
+                "name": "AgentID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "StageCode",
+                "type": "bigint",
+                "precision": 19
+            },
+            {
+                "name": "RequesterID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "EventID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "AccountID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "DiscountAmount",
+                "type": "decimal",
+                "precision": 38,
+                "scale": 2
+            },
+            {
+                "name": "RequestorType",
+                "type": "bigint",
+                "precision": 19
+            },
+            {
+                "name": "TotalAmountofOpportunity",
+                "type": "decimal",
+                "precision": 38,
+                "scale": 4
+            },
+            {
+                "name": "dwtc_sourcetype",
+                "type": "bigint",
+                "precision": 19
+            },
+            {
+                "name": "CustomerId",
+                "type": "nvarchar"
+            },
+            {
+                "name": "LeadID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "TradeAssocID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "OpportunityId",
+                "type": "nvarchar"
+            },
+            {
+                "name": "StatusID",
+                "type": "bigint",
+                "precision": 19
+            },
+            {
+                "name": "CreatedOn-Opportunity",
+                "type": "nvarchar"
+            },
+            {
+                "name": "dwtc_ordergrossarea",
+                "type": "bigint",
+                "precision": 19
+            },
+            {
+                "name": "NetSQMofOpportunity",
+                "type": "decimal",
+                "precision": 38,
+                "scale": 2
+            },
+            {
+                "name": "EventSectorID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "dwtc_displaygrossarea",
+                "type": "bigint",
+                "precision": 19
+            },
+            {
+                "name": "RetainedY/N",
+                "type": "bit"
+            },
+            {
+                "name": "dwtc_opportunitysourcetype",
+                "type": "bigint",
+                "precision": 19
+            },
+            {
+                "name": "OnwerID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "ProbabilityCode",
+                "type": "bigint",
+                "precision": 19
+            },
+            {
+                "name": "OpportunityClosingDate",
+                "type": "datetime2",
+                "scale": 7
+            },
+            {
+                "name": "dwtc_area",
+                "type": "bigint",
+                "precision": 19
+            },
+            {
+                "name": "owneridname",
+                "type": "nvarchar"
+            },
+            {
+                "name": "OpportunityNumber",
+                "type": "nvarchar"
+            },
+            {
+                "name": "parentcontactid",
+                "type": "nvarchar"
+            }
+        ],
+        "typeProperties": {
+            "schema": "ods",
+            "table": "EM_Opportunity_CRM"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

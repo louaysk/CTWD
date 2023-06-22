@@ -1,0 +1,106 @@
+{
+    "name": "Dim_Contract",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+            "type": "LinkedServiceReference",
+            "parameters": {
+                "DBName": "DWTC_DWH"
+            }
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [
+            {
+                "name": "Contract_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "ContractID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Event_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "Opportunity_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "Amount_Contract",
+                "type": "decimal",
+                "precision": 38,
+                "scale": 2
+            },
+            {
+                "name": "CreatedOn",
+                "type": "datetime",
+                "precision": 23,
+                "scale": 3
+            },
+            {
+                "name": "NetSqm",
+                "type": "decimal",
+                "precision": 38,
+                "scale": 2
+            },
+            {
+                "name": "TypeOfContract",
+                "type": "bigint",
+                "precision": 19
+            },
+            {
+                "name": "OrderID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "HallName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "StandNumber",
+                "type": "nvarchar"
+            },
+            {
+                "name": "StatusCode",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Execution_Date",
+                "type": "datetime",
+                "precision": 23,
+                "scale": 3
+            },
+            {
+                "name": "Exhibitorpoints",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Eventsector",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Paymentplan",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Owner",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Proposal_ID",
+                "type": "int",
+                "precision": 10
+            }
+        ],
+        "typeProperties": {
+            "schema": "EM_DWH",
+            "table": "DIM_CONTRACT"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

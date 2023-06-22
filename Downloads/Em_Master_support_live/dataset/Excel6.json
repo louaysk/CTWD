@@ -1,0 +1,23 @@
+{
+    "name": "Excel6",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "AzureBlobStorage1",
+            "type": "LinkedServiceReference"
+        },
+        "annotations": [],
+        "type": "Excel",
+        "typeProperties": {
+            "location": {
+                "type": "AzureBlobStorageLocation",
+                "fileName": "*.xlsx",
+                "folderPath": "Landing Zone/Data Research/Project",
+                "container": "em-data"
+            },
+            "sheetIndex": 0,
+            "firstRowAsHeader": true
+        },
+        "schema": []
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

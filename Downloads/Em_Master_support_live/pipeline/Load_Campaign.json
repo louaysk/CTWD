@@ -1,0 +1,46 @@
+{
+    "name": "Load_Campaign",
+    "properties": {
+        "activities": [
+            {
+                "name": "LZ ods Campaign Eloqua",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "LoaddataCampaign",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "Dwh_Campaign",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "LZ ods Campaign Eloqua",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "DIM_CAMPAIGN",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            }
+        ],
+        "folder": {
+            "name": "EM/EM Master"
+        },
+        "annotations": [],
+        "lastPublishTime": "2023-06-13T01:10:09Z"
+    },
+    "type": "Microsoft.Synapse/workspaces/pipelines"
+}

@@ -1,0 +1,52 @@
+{
+    "name": "Load ALL DELTA LZ",
+    "properties": {
+        "activities": [
+            {
+                "name": "Execute Pipeline1",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "LZ Delta EL01",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "Execute Pipeline2",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "LZ DELTA EL06",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "Execute Pipeline3",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "LZ DELTA EL13",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            }
+        ],
+        "folder": {
+            "name": "EM/ELOQUA/Activity"
+        },
+        "annotations": [],
+        "lastPublishTime": "2023-06-13T01:09:59Z"
+    },
+    "type": "Microsoft.Synapse/workspaces/pipelines"
+}

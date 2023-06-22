@@ -1,0 +1,148 @@
+{
+    "name": "DIM_COMPANY",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+            "type": "LinkedServiceReference",
+            "parameters": {
+                "DBName": "DWTC_DWH"
+            }
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [
+            {
+                "name": "Company_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "Company_Name",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Country",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Accountid_crm",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Industryname",
+                "type": "nvarchar"
+            },
+            {
+                "name": "SubIndustryID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "sectorname",
+                "type": "nvarchar"
+            },
+            {
+                "name": "ID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Company_Type",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Industry_Type",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Sub_Industry_Type",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Address_Line_1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Address_Line_2",
+                "type": "nvarchar"
+            },
+            {
+                "name": "City",
+                "type": "nvarchar"
+            },
+            {
+                "name": "State",
+                "type": "nvarchar"
+            },
+            {
+                "name": "ZIP/Postal_Code",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Region",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Email",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Website",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Phone_1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Phone_2",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Billing_Address_Line_1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Billing_Address_Line_2",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Billing_City",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Billing_State",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Billing_ZIP/Postal_Code",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Billing_Country",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Company_Annual_Rev",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Billing_PO_Box",
+                "type": "nvarchar"
+            },
+            {
+                "name": "PO_Box",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Execution_Date",
+                "type": "datetime",
+                "precision": 23,
+                "scale": 3
+            }
+        ],
+        "typeProperties": {
+            "schema": "EM_DWH",
+            "table": "DIM_COMPANY"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

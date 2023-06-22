@@ -1,0 +1,78 @@
+{
+    "name": "Json93",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "AzureBlobStorage1",
+            "type": "LinkedServiceReference"
+        },
+        "annotations": [],
+        "type": "Json",
+        "typeProperties": {
+            "location": {
+                "type": "AzureBlobStorageLocation",
+                "folderPath": "Landing Zone/Eloqua/Eloqua01/ActivityFormSubmit",
+                "container": "em-data"
+            }
+        },
+        "schema": {
+            "type": "object",
+            "properties": {
+                "ActivityId": {
+                    "type": "integer"
+                },
+                "ActivityType": {
+                    "type": "string"
+                },
+                "AssetId": {
+                    "type": "integer"
+                },
+                "AssetName": {
+                    "type": "string"
+                },
+                "AssetType": {
+                    "type": "string"
+                },
+                "CRMCampaignId": {
+                    "type": "string"
+                },
+                "CampaignId": {
+                    "type": "string"
+                },
+                "CampaignName": {
+                    "type": "string"
+                },
+                "CampaignResponseCreatedAt": {
+                    "type": "string"
+                },
+                "ContactId": {
+                    "type": "integer"
+                },
+                "CreatedAt": {
+                    "type": "string"
+                },
+                "ExternalId": {
+                    "type": "string"
+                },
+                "FormSubmitSavedId": {
+                    "type": "integer"
+                },
+                "MemberStatus": {
+                    "type": "string"
+                },
+                "RawData": {
+                    "type": "string"
+                },
+                "VisitorExternalId": {
+                    "type": "string"
+                },
+                "VisitorId": {
+                    "type": "integer"
+                },
+                "Instance": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

@@ -1,0 +1,29 @@
+{
+    "name": "EL01ActivityBounceback",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "Eloqua1_API",
+            "type": "LinkedServiceReference"
+        },
+        "parameters": {
+            "Offset": {
+                "type": "string",
+                "defaultValue": "0"
+            },
+            "TEST": {
+                "type": "string",
+                "defaultValue": "/syncs/12014"
+            }
+        },
+        "annotations": [],
+        "type": "RestResource",
+        "typeProperties": {
+            "relativeUrl": {
+                "value": "@concat('api/bulk/2.0',dataset().TEST,'/data?limit=1000&offset=',dataset().Offset)",
+                "type": "Expression"
+            }
+        },
+        "schema": []
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

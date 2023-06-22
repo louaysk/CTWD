@@ -1,0 +1,124 @@
+{
+    "name": "LoaddataCampaign",
+    "properties": {
+        "activities": [
+            {
+                "name": "Load Camapign ODS",
+                "type": "ExecuteDataFlow",
+                "dependsOn": [
+                    {
+                        "activity": "Load Campaign 13",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "dataflow": {
+                        "referenceName": "DataflowLoadCampaign",
+                        "type": "DataFlowReference"
+                    },
+                    "staging": {
+                        "linkedService": {
+                            "referenceName": "dwtc-bi-WorkspaceDefaultStorage",
+                            "type": "LinkedServiceReference"
+                        },
+                        "folderPath": "dwtcfilestest/stg strg"
+                    },
+                    "compute": {
+                        "coreCount": 32,
+                        "computeType": "MemoryOptimized"
+                    },
+                    "traceLevel": "Fine"
+                }
+            },
+            {
+                "name": "Load Campaign EL01",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Eloqua01Campaign_ApplicationAPI",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "Load Campaign 06",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Load Campaign EL01",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Eloqua06Campaign",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "Load Campaign 13",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Load Campaign 06",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Eloqua13campaign13",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "Campaign with event",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Load Camapign ODS",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Event Name Eloqua",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            }
+        ],
+        "folder": {
+            "name": "EM/ELOQUA/Campaign"
+        },
+        "annotations": [],
+        "lastPublishTime": "2023-06-13T01:09:22Z"
+    },
+    "type": "Microsoft.Synapse/workspaces/pipelines"
+}

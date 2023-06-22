@@ -1,0 +1,229 @@
+{
+    "name": "FACT_SALESORDER",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+            "type": "LinkedServiceReference",
+            "parameters": {
+                "DBName": "DWTC_DWH"
+            }
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [
+            {
+                "name": "Salesorderid",
+                "type": "nvarchar"
+            },
+            {
+                "name": "StatusCode",
+                "type": "nvarchar"
+            },
+            {
+                "name": "GrossSQM",
+                "type": "decimal",
+                "precision": 38,
+                "scale": 2
+            },
+            {
+                "name": "Contact_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "Event_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "Opportunity_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "Contract_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "NetSqm",
+                "type": "decimal",
+                "precision": 38,
+                "scale": 2
+            },
+            {
+                "name": "CreatedOn",
+                "type": "datetime",
+                "precision": 23,
+                "scale": 3
+            },
+            {
+                "name": "Ordernumber",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Amount_Order",
+                "type": "decimal",
+                "precision": 38,
+                "scale": 2
+            },
+            {
+                "name": "DimX",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Orderstandnumber",
+                "type": "nvarchar"
+            },
+            {
+                "name": "PPKID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "CustomerID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "OrderType",
+                "type": "nvarchar"
+            },
+            {
+                "name": "DimY",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Awardwinningstartup",
+                "type": "bit"
+            },
+            {
+                "name": "Exhibitorpoint",
+                "type": "bigint",
+                "precision": 19
+            },
+            {
+                "name": "Originalcreatedon",
+                "type": "datetime",
+                "precision": 23,
+                "scale": 3
+            },
+            {
+                "name": "Requestorid",
+                "type": "nvarchar"
+            },
+            {
+                "name": "LookingToRaiseFunds",
+                "type": "bit"
+            },
+            {
+                "name": "MainReasonsToExhibit",
+                "type": "nvarchar"
+            },
+            {
+                "name": "LookingToSetupDXBOffice",
+                "type": "bit"
+            },
+            {
+                "name": "FundraisingStage",
+                "type": "bigint",
+                "precision": 19
+            },
+            {
+                "name": "TypeOfCompanyWantToMeet",
+                "type": "bigint",
+                "precision": 19
+            },
+            {
+                "name": "MostRecentEvaluation",
+                "type": "bigint",
+                "precision": 19
+            },
+            {
+                "name": "IncubatorsAccelerators",
+                "type": "bit"
+            },
+            {
+                "name": "FirstTimeInMENA",
+                "type": "bit"
+            },
+            {
+                "name": "Execution_Date",
+                "type": "datetime",
+                "precision": 23,
+                "scale": 3
+            },
+            {
+                "name": "Contact_GR_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "Billtocompany",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Billtocontact",
+                "type": "nvarchar"
+            },
+            {
+                "name": "ShipToCompany",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Internal",
+                "type": "nvarchar"
+            },
+            {
+                "name": "RequestorType",
+                "type": "nvarchar"
+            },
+            {
+                "name": "EventSector",
+                "type": "nvarchar"
+            },
+            {
+                "name": "StandType",
+                "type": "nvarchar"
+            },
+            {
+                "name": "ProposalNumber",
+                "type": "nvarchar"
+            },
+            {
+                "name": "ExhibitorPortalContact",
+                "type": "nvarchar"
+            },
+            {
+                "name": "ExhibitorPoints",
+                "type": "nvarchar"
+            },
+            {
+                "name": "AgentPoints",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Company_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "GlCode",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Amount_orderproduct",
+                "type": "decimal",
+                "precision": 38,
+                "scale": 2
+            },
+            {
+                "name": "barter",
+                "type": "nvarchar"
+            }
+        ],
+        "typeProperties": {
+            "schema": "EM_DWH",
+            "table": "FACT_SALESORDER"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

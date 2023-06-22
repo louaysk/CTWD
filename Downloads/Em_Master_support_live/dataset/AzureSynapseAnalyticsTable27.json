@@ -1,0 +1,20 @@
+{
+    "name": "AzureSynapseAnalyticsTable27",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+            "type": "LinkedServiceReference",
+            "parameters": {
+                "DBName": "DWTC_DWH"
+            }
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [],
+        "typeProperties": {
+            "schema": "ODS",
+            "table": "EM_Product_PriceList_CRM"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

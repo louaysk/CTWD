@@ -1,0 +1,22 @@
+{
+    "name": "LandingZoneDataResearchFiles",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultStorage",
+            "type": "LinkedServiceReference"
+        },
+        "annotations": [],
+        "type": "Excel",
+        "typeProperties": {
+            "sheetName": "0",
+            "location": {
+                "type": "AzureBlobFSLocation",
+                "folderPath": "Landing Zone/Data Research/Data Research",
+                "fileSystem": "em-data"
+            },
+            "firstRowAsHeader": true
+        },
+        "schema": []
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

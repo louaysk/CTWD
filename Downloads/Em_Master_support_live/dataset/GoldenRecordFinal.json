@@ -1,0 +1,184 @@
+{
+    "name": "GoldenRecordFinal",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+            "type": "LinkedServiceReference",
+            "parameters": {
+                "DBName": "DWTC_DWH"
+            }
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [
+            {
+                "name": "Contact_GR_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "soundex_name",
+                "type": "nvarchar"
+            },
+            {
+                "name": "max_modified_date",
+                "type": "datetime",
+                "precision": 23,
+                "scale": 3
+            },
+            {
+                "name": "Email",
+                "type": "nvarchar"
+            },
+            {
+                "name": "has_crm_contact",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Birth_Certif",
+                "type": "datetime",
+                "precision": 23,
+                "scale": 3
+            },
+            {
+                "name": "MobilePhone",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Country",
+                "type": "nvarchar"
+            },
+            {
+                "name": "CountryID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "DateCreated",
+                "type": "datetime",
+                "precision": 23,
+                "scale": 3
+            },
+            {
+                "name": "Contact_Created_Source",
+                "type": "nvarchar"
+            },
+            {
+                "name": "jobtitle",
+                "type": "nvarchar"
+            },
+            {
+                "name": "firstname",
+                "type": "nvarchar"
+            },
+            {
+                "name": "lastname",
+                "type": "nvarchar"
+            },
+            {
+                "name": "fullname",
+                "type": "nvarchar"
+            },
+            {
+                "name": "ContactType",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Company",
+                "type": "nvarchar"
+            },
+            {
+                "name": "CompanyID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "Address_line_1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Address_line_2",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Nationality",
+                "type": "nvarchar"
+            },
+            {
+                "name": "City",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Prefix",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Region",
+                "type": "nvarchar"
+            },
+            {
+                "name": "ZIP_Postal_Code",
+                "type": "nvarchar"
+            },
+            {
+                "name": "State",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Createdby",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Modifiedby",
+                "type": "nvarchar"
+            },
+            {
+                "name": "JobFunction",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Statuscode",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Globally_Unsubscribed",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Email1_HardBounce",
+                "type": "nvarchar"
+            },
+            {
+                "name": "grid",
+                "type": "nvarchar"
+            },
+            {
+                "name": "ExecutionDate",
+                "type": "datetime",
+                "precision": 23,
+                "scale": 3
+            },
+            {
+                "name": "SeniorityLevel",
+                "type": "nvarchar"
+            },
+            {
+                "name": "PhoneNumber2",
+                "type": "nvarchar"
+            },
+            {
+                "name": "PhoneNumber1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "MobilePhone2",
+                "type": "nvarchar"
+            }
+        ],
+        "typeProperties": {
+            "schema": "EM_DWH",
+            "table": "DIM_CONTACT_GR"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

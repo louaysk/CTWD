@@ -1,0 +1,135 @@
+{
+    "name": "NonCrmContacts",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+            "type": "LinkedServiceReference",
+            "parameters": {
+                "DBName": "DWTC_DWH"
+            }
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [
+            {
+                "name": "soundex_name",
+                "type": "nvarchar"
+            },
+            {
+                "name": "email",
+                "type": "nvarchar"
+            },
+            {
+                "name": "FirstName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "LastName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Full_Name",
+                "type": "nvarchar"
+            },
+            {
+                "name": "last_modified_date",
+                "type": "datetime2",
+                "scale": 7
+            },
+            {
+                "name": "source",
+                "type": "nvarchar"
+            },
+            {
+                "name": "MobilePhone",
+                "type": "nvarchar"
+            },
+            {
+                "name": "IsSubscribed",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Company",
+                "type": "nvarchar"
+            },
+            {
+                "name": "JobTitle",
+                "type": "nvarchar"
+            },
+            {
+                "name": "IsBounced",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Country",
+                "type": "nvarchar"
+            },
+            {
+                "name": "DateCreated",
+                "type": "datetime2",
+                "scale": 7
+            },
+            {
+                "name": "Address_line_1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Address_line_2",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Nationality",
+                "type": "nvarchar"
+            },
+            {
+                "name": "City",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Prefix",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Region",
+                "type": "nvarchar"
+            },
+            {
+                "name": "ZIP_Postal_Code",
+                "type": "nvarchar"
+            },
+            {
+                "name": "State",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Createdby",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Modifiedby",
+                "type": "nvarchar"
+            },
+            {
+                "name": "ContactType",
+                "type": "nvarchar"
+            },
+            {
+                "name": "JobFunction",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Statuscode",
+                "type": "nvarchar"
+            },
+            {
+                "name": "SeniorityLevel",
+                "type": "nvarchar"
+            }
+        ],
+        "typeProperties": {
+            "schema": "ods",
+            "table": "Non_CRM_CONTACTS"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

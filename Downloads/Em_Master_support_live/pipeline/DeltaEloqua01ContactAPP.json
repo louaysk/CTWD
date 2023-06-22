@@ -1,0 +1,532 @@
+{
+    "name": "DeltaEloqua01ContactAPP",
+    "properties": {
+        "activities": [
+            {
+                "name": "Web1",
+                "type": "WebActivity",
+                "dependsOn": [
+                    {
+                        "activity": "Wait2",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "url": {
+                        "value": "https://secure.p04.eloqua.com/api/bulk/2.0@{variables('FinalUriSyncdata')}/data",
+                        "type": "Expression"
+                    },
+                    "connectVia": {
+                        "referenceName": "AutoResolveIntegrationRuntime",
+                        "type": "IntegrationRuntimeReference"
+                    },
+                    "method": "GET",
+                    "authentication": {
+                        "type": "Basic",
+                        "username": {
+                            "value": "dwtc01\\dwtc.elq",
+                            "type": "Expression"
+                        },
+                        "password": {
+                            "type": "AzureKeyVaultSecret",
+                            "store": {
+                                "referenceName": "AzureKeyVault1",
+                                "type": "LinkedServiceReference"
+                            },
+                            "secretName": "PWD"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Set variable1",
+                "type": "SetVariable",
+                "dependsOn": [
+                    {
+                        "activity": "Web1",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "variableName": "TotalRecord",
+                    "value": {
+                        "value": "@string(activity('Web1').output.totalResults)",
+                        "type": "Expression"
+                    }
+                }
+            },
+            {
+                "name": "ForEach1",
+                "type": "ForEach",
+                "dependsOn": [
+                    {
+                        "activity": "Set variable9",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    },
+                    {
+                        "activity": "If Condition1",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "items": {
+                        "value": "@range(1,add(div(int(variables('TotalRecord')),10000),1))",
+                        "type": "Expression"
+                    },
+                    "isSequential": true,
+                    "activities": [
+                        {
+                            "name": "Data flow1",
+                            "type": "ExecuteDataFlow",
+                            "dependsOn": [],
+                            "policy": {
+                                "timeout": "0.12:00:00",
+                                "retry": 0,
+                                "retryIntervalInSeconds": 30,
+                                "secureOutput": false,
+                                "secureInput": false
+                            },
+                            "userProperties": [],
+                            "typeProperties": {
+                                "dataflow": {
+                                    "referenceName": "UPDATEDFEloqua01contact",
+                                    "type": "DataFlowReference",
+                                    "parameters": {
+                                        "Item": {
+                                            "value": "'@{item()}'",
+                                            "type": "Expression"
+                                        }
+                                    },
+                                    "datasetParameters": {
+                                        "source1": {
+                                            "Offset": {
+                                                "value": "@variables('Offset')",
+                                                "type": "Expression"
+                                            },
+                                            "TEST": {
+                                                "value": "@variables('FinalUriSyncdata')",
+                                                "type": "Expression"
+                                            }
+                                        }
+                                    }
+                                },
+                                "compute": {
+                                    "coreCount": 32,
+                                    "computeType": "MemoryOptimized"
+                                },
+                                "traceLevel": "Fine"
+                            }
+                        },
+                        {
+                            "name": "Set variable2",
+                            "type": "SetVariable",
+                            "dependsOn": [
+                                {
+                                    "activity": "Set variable3",
+                                    "dependencyConditions": [
+                                        "Succeeded"
+                                    ]
+                                }
+                            ],
+                            "userProperties": [],
+                            "typeProperties": {
+                                "variableName": "Offset",
+                                "value": {
+                                    "value": "@string(add(int(variables('Offset1')),10000))",
+                                    "type": "Expression"
+                                }
+                            }
+                        },
+                        {
+                            "name": "Set variable3",
+                            "type": "SetVariable",
+                            "dependsOn": [
+                                {
+                                    "activity": "Data flow1",
+                                    "dependencyConditions": [
+                                        "Succeeded"
+                                    ]
+                                }
+                            ],
+                            "userProperties": [],
+                            "typeProperties": {
+                                "variableName": "Offset1",
+                                "value": {
+                                    "value": "@string(variables('Offset'))",
+                                    "type": "Expression"
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "Web2",
+                "type": "WebActivity",
+                "dependsOn": [
+                    {
+                        "activity": "Set variable1_copy1",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "url": "https://secure.p04.eloqua.com/api/bulk/2.0/contacts/exports",
+                    "connectVia": {
+                        "referenceName": "AutoResolveIntegrationRuntime",
+                        "type": "IntegrationRuntimeReference"
+                    },
+                    "method": "POST",
+                    "body": {
+                        "value": "{\n    \"name\": \"Contact Lead Score Export\",\n    \"fields\": {\n        \"EmailAddress\": \"{{Contact.Field(C_EmailAddress)}}\",\n        \"C_FirstName\": \"{{Contact.Field(C_FirstName)}}\",\n        \"C_LastName\": \"{{Contact.Field(C_LastName)}}\",\n        \"C_Company\": \"{{Contact.Field(C_Company)}}\",\n        \"C_EmailDisplayName\": \"{{Contact.Field(C_EmailDisplayName)}}\",\n        \"C_Address1\": \"{{Contact.Field(C_Address1)}}\",\n        \"C_Address2\": \"{{Contact.Field(C_Address2)}}\",\n        \"C_Address3\": \"{{Contact.Field(C_Address3)}}\",\n        \"C_City\": \"{{Contact.Field(C_City)}}\",\n        \"C_State_Prov\": \"{{Contact.Field(C_State_Prov)}}\",\n        \"C_Zip_Postal\": \"{{Contact.Field(C_Zip_Postal)}}\",\n        \"C_Country\": \"{{Contact.Field(C_Country)}}\",\n        \"C_BusPhone\": \"{{Contact.Field(C_BusPhone)}}\",\n        \"C_MobilePhone\": \"{{Contact.Field(C_MobilePhone)}}\",\n        \"C_Fax\": \"{{Contact.Field(C_Fax)}}\",\n        \"C_Title\": \"{{Contact.Field(C_Title)}}\",\n        \"C_Salutation\": \"{{Contact.Field(C_Salutation)}}\",\n        \"C_Salesperson\": \"{{Contact.Field(C_Salesperson)}}\",\n        \"C_SFDCContactID\": \"{{Contact.Field(C_SFDCContactID)}}\",\n        \"C_SFDCLeadID\": \"{{Contact.Field(C_SFDCLeadID)}}\",\n        \"C_DateCreated\": \"{{Contact.Field(C_DateCreated)}}\",\n        \"C_DateModified\": \"{{Contact.Field(C_DateModified)}}\",\n        \"ContactIDExt\": \"{{Contact.Field(ContactIDExt)}}\",\n        \"C_SFDCAccountID\": \"{{Contact.Field(C_SFDCAccountID)}}\",\n        \"C_LastModifiedByExtIntegrateSystem\": \"{{Contact.Field(C_LastModifiedByExtIntegrateSystem)}}\",\n        \"C_SFDCLastCampaignID\": \"{{Contact.Field(C_SFDCLastCampaignID)}}\",\n        \"C_SFDCLastCampaignStatus\": \"{{Contact.Field(C_SFDCLastCampaignStatus)}}\",\n        \"C_Company_Revenue1\": \"{{Contact.Field(C_Company_Revenue1)}}\",\n        \"C_SFDC_EmailOptOut1\": \"{{Contact.Field(C_SFDC_EmailOptOut1)}}\",\n        \"C_Lead_Source___Most_Recent1\": \"{{Contact.Field(C_Lead_Source___Most_Recent1)}}\",\n        \"C_Lead_Source___Original1\": \"{{Contact.Field(C_Lead_Source___Original1)}}\",\n        \"C_Industry1\": \"{{Contact.Field(C_Industry1)}}\",\n        \"C_Annual_Revenue1\": \"{{Contact.Field(C_Annual_Revenue1)}}\",\n        \"C_Lead_Status1\": \"{{Contact.Field(C_Lead_Status1)}}\",\n        \"C_Job_Role1\": \"{{Contact.Field(C_Job_Role1)}}\",\n        \"C_LS___High_Value_Website_Content1\": \"{{Contact.Field(C_LS___High_Value_Website_Content1)}}\",\n        \"C_Lead_Score_Date___Most_Recent1\": \"{{Contact.Field(C_Lead_Score_Date___Most_Recent1)}}\",\n        \"C_Integrated_Marketing_and_Sales_Funnel_Stage\": \"{{Contact.Field(C_Integrated_Marketing_and_Sales_Funnel_Stage)}}\",\n        \"C_Product_Solution_of_Interest1\": \"{{Contact.Field(C_Product_Solution_of_Interest1)}}\",\n        \"C_Region1\": \"{{Contact.Field(C_Region1)}}\",\n        \"C_elqPURLName1\": \"{{Contact.Field(C_elqPURLName1)}}\",\n        \"C_Lead_Rating___Combined1\": \"{{Contact.Field(C_Lead_Rating___Combined1)}}\",\n        \"C_EmailAddressDomain\": \"{{Contact.Field(C_EmailAddressDomain)}}\",\n        \"C_FirstAndLastName\": \"{{Contact.Field(C_FirstAndLastName)}}\",\n        \"C_Company_Size1\": \"{{Contact.Field(C_Company_Size1)}}\",\n        \"C_Lead_Score___Last_High_Touch_Event_Date1\": \"{{Contact.Field(C_Lead_Score___Last_High_Touch_Event_Date1)}}\",\n        \"C_Lead_Rating___Explicit1\": \"{{Contact.Field(C_Lead_Rating___Explicit1)}}\",\n        \"C_Lead_Rating___Implicit1\": \"{{Contact.Field(C_Lead_Rating___Implicit1)}}\",\n        \"C_Lead_Score___Explicit1\": \"{{Contact.Field(C_Lead_Score___Explicit1)}}\",\n        \"C_Lead_Score___Implicit1\": \"{{Contact.Field(C_Lead_Score___Implicit1)}}\",\n        \"C_Lead_Score_Date___Profile___Most_Recent1\": \"{{Contact.Field(C_Lead_Score_Date___Profile___Most_Recent1)}}\",\n        \"C_Territory\": \"{{Contact.Field(C_Territory)}}\",\n        \"C_MD5HashedEmailAddress\": \"{{Contact.Field(C_MD5HashedEmailAddress)}}\",\n        \"C_SHA256HashedEmailAddress\": \"{{Contact.Field(C_SHA256HashedEmailAddress)}}\",\n        \"C_MD5HashedBusPhone\": \"{{Contact.Field(C_MD5HashedBusPhone)}}\",\n        \"C_SHA256HashedBusPhone\": \"{{Contact.Field(C_SHA256HashedBusPhone)}}\",\n        \"C_MD5HashedMobilePhone\": \"{{Contact.Field(C_MD5HashedMobilePhone)}}\",\n        \"C_SHA256HashedMobilePhone\": \"{{Contact.Field(C_SHA256HashedMobilePhone)}}\",\n        \"C_ElqPURLName\": \"{{Contact.Field(C_ElqPURLName)}}\",\n        \"C_Designation1\": \"{{Contact.Field(C_Designation1)}}\",\n        \"C_Nationality1\": \"{{Contact.Field(C_Nationality1)}}\",\n        \"C_Age_Group1\": \"{{Contact.Field(C_Age_Group1)}}\",\n        \"C_Job_Function1\": \"{{Contact.Field(C_Job_Function1)}}\",\n        \"C_IND_ID11\": \"{{Contact.Field(C_IND_ID11)}}\",\n        \"C_Gender1\": \"{{Contact.Field(C_Gender1)}}\",\n        \"C_Country_Code___Phone1\": \"{{Contact.Field(C_Country_Code___Phone1)}}\",\n        \"C_MSCRMContactID\": \"{{Contact.Field(C_MSCRMContactID)}}\",\n        \"C_MSCRMLeadID\": \"{{Contact.Field(C_MSCRMLeadID)}}\",\n        \"C_MSCRMAccountID\": \"{{Contact.Field(C_MSCRMAccountID)}}\",\n        \"C_MSCRMLastCampaignID\": \"{{Contact.Field(C_MSCRMLastCampaignID)}}\",\n        \"C_MSCRMLastCampaignName\": \"{{Contact.Field(C_MSCRMLastCampaignName)}}\",\n        \"C_MSCRMLastCampaignStatus\": \"{{Contact.Field(C_MSCRMLastCampaignStatus)}}\",\n        \"C_LastMSCRMCampaignResponseID\": \"{{Contact.Field(C_LastMSCRMCampaignResponseID)}}\",\n        \"C_MSCRM_EmailOptOut\": \"{{Contact.Field(C_MSCRM_EmailOptOut)}}\",\n        \"C_MSCRM_LeadRating\": \"{{Contact.Field(C_MSCRM_LeadRating)}}\",\n        \"C_Middle_Name1\": \"{{Contact.Field(C_Middle_Name1)}}\",\n        \"C_Company_Website1\": \"{{Contact.Field(C_Company_Website1)}}\",\n        \"C_Field_Merge___Personalization1\": \"{{Contact.Field(C_Field_Merge___Personalization1)}}\",\n        \"C_Username1\": \"{{Contact.Field(C_Username1)}}\",\n        \"C_Field_Merge___Password1\": \"{{Contact.Field(C_Field_Merge___Password1)}}\",\n        \"C_Pavilion1\": \"{{Contact.Field(C_Pavilion1)}}\",\n        \"C_Promo_Code_11\": \"{{Contact.Field(C_Promo_Code_11)}}\",\n        \"C_Promo_Code_21\": \"{{Contact.Field(C_Promo_Code_21)}}\",\n        \"C_Promo_Code_31\": \"{{Contact.Field(C_Promo_Code_31)}}\",\n        \"C_Promo_Code_41\": \"{{Contact.Field(C_Promo_Code_41)}}\",\n        \"C_Promo_Code_51\": \"{{Contact.Field(C_Promo_Code_51)}}\",\n        \"C_Confirm_Email_Address1\": \"{{Contact.Field(C_Confirm_Email_Address1)}}\",\n        \"C_Pre_Reg_URN1\": \"{{Contact.Field(C_Pre_Reg_URN1)}}\",\n        \"C_Recommend_a_friend___Full_Name1\": \"{{Contact.Field(C_Recommend_a_friend___Full_Name1)}}\",\n        \"C_Recommend_a_Friend___Email1\": \"{{Contact.Field(C_Recommend_a_Friend___Email1)}}\",\n        \"C_Recommend_a_Friend___Full_Name_21\": \"{{Contact.Field(C_Recommend_a_Friend___Full_Name_21)}}\",\n        \"C_Recommend_a_Friend___Email_21\": \"{{Contact.Field(C_Recommend_a_Friend___Email_21)}}\",\n        \"C_Recommend_a_Friend___Full_Name_31\": \"{{Contact.Field(C_Recommend_a_Friend___Full_Name_31)}}\",\n        \"C_Recommend_a_Friend___Email_31\": \"{{Contact.Field(C_Recommend_a_Friend___Email_31)}}\",\n        \"C_Recommend_a_Friend___Full_Name_41\": \"{{Contact.Field(C_Recommend_a_Friend___Full_Name_41)}}\",\n        \"C_Recommend_a_Friend___Email_41\": \"{{Contact.Field(C_Recommend_a_Friend___Email_41)}}\",\n        \"C_Print_Badge_at_Home_Link1\": \"{{Contact.Field(C_Print_Badge_at_Home_Link1)}}\",\n        \"C_Name_of_Publication__Radio_Station__TV_Chan\": \"{{Contact.Field(C_Name_of_Publication__Radio_Station__TV_Chan)}}\",\n        \"Contact_Id\": \"{{Contact.Id}}\",\n        \"IsSubscribed\": \"{{Contact.Email.IsSubscribed}}\",\n        \"IsBounced\": \"{{Contact.Email.IsBounced}}\",\n        \"EmailFormat\": \"{{Contact.Email.Format}}\"\n    },\n    \"areSystemTimestampsInUTC\": true,\n    \"filter\": \"'{{Contact.Field(C_DateModified)}}' > '@{variables('lastdate')}'\"}",
+                        "type": "Expression"
+                    },
+                    "authentication": {
+                        "type": "Basic",
+                        "username": "dwtc01\\dwtc.elq",
+                        "password": {
+                            "type": "AzureKeyVaultSecret",
+                            "store": {
+                                "referenceName": "AzureKeyVault1",
+                                "type": "LinkedServiceReference"
+                            },
+                            "secretName": "PWD"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Set variable4",
+                "type": "SetVariable",
+                "dependsOn": [
+                    {
+                        "activity": "Web2",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "variableName": "VAR_URI",
+                    "value": {
+                        "value": "@activity('Web2').output.uri",
+                        "type": "Expression"
+                    }
+                }
+            },
+            {
+                "name": "Web3",
+                "type": "WebActivity",
+                "dependsOn": [
+                    {
+                        "activity": "Set variable4",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "url": "https://secure.p04.eloqua.com/api/bulk/2.0/syncs",
+                    "connectVia": {
+                        "referenceName": "AutoResolveIntegrationRuntime",
+                        "type": "IntegrationRuntimeReference"
+                    },
+                    "method": "POST",
+                    "body": {
+                        "value": "{\n   \"syncedInstanceUri\" : \"@{variables('VAR_URI')}\"\n}",
+                        "type": "Expression"
+                    },
+                    "authentication": {
+                        "type": "Basic",
+                        "username": "dwtc01\\dwtc.elq",
+                        "password": {
+                            "type": "AzureKeyVaultSecret",
+                            "store": {
+                                "referenceName": "AzureKeyVault1",
+                                "type": "LinkedServiceReference"
+                            },
+                            "secretName": "PWD"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Set variable8",
+                "type": "SetVariable",
+                "dependsOn": [
+                    {
+                        "activity": "Web3",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "variableName": "syncuri",
+                    "value": {
+                        "value": "@activity('Web3').output.uri",
+                        "type": "Expression"
+                    }
+                }
+            },
+            {
+                "name": "Web4",
+                "type": "WebActivity",
+                "dependsOn": [
+                    {
+                        "activity": "Set variable8",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "url": {
+                        "value": "https://secure.p04.eloqua.com/api/bulk/2.0@{variables('syncuri')}",
+                        "type": "Expression"
+                    },
+                    "connectVia": {
+                        "referenceName": "AutoResolveIntegrationRuntime",
+                        "type": "IntegrationRuntimeReference"
+                    },
+                    "method": "GET",
+                    "authentication": {
+                        "type": "Basic",
+                        "username": "dwtc01\\dwtc.elq",
+                        "password": {
+                            "type": "AzureKeyVaultSecret",
+                            "store": {
+                                "referenceName": "AzureKeyVault1",
+                                "type": "LinkedServiceReference"
+                            },
+                            "secretName": "PWD"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Set variable9",
+                "type": "SetVariable",
+                "dependsOn": [
+                    {
+                        "activity": "Web4",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "variableName": "FinalUriSyncdata",
+                    "value": {
+                        "value": "@activity('Web4').output.uri",
+                        "type": "Expression"
+                    }
+                }
+            },
+            {
+                "name": "If Condition1",
+                "type": "IfCondition",
+                "dependsOn": [
+                    {
+                        "activity": "Set variable1",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "expression": {
+                        "value": "@not(equals(variables('TotalRecord'),0))",
+                        "type": "Expression"
+                    },
+                    "ifFalseActivities": [
+                        {
+                            "name": "Set variable10",
+                            "type": "SetVariable",
+                            "dependsOn": [],
+                            "userProperties": [],
+                            "typeProperties": {
+                                "variableName": "erreur",
+                                "value": {
+                                    "value": "@string(div(1,0))",
+                                    "type": "Expression"
+                                }
+                            }
+                        }
+                    ],
+                    "ifTrueActivities": [
+                        {
+                            "name": "Wait1",
+                            "type": "Wait",
+                            "dependsOn": [],
+                            "userProperties": [],
+                            "typeProperties": {
+                                "waitTimeInSeconds": 3
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "Lookup1",
+                "type": "Lookup",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "source": {
+                        "type": "SqlDWSource",
+                        "sqlReaderQuery": "SELECT \n[last_modification_Date]\n FROM [ods].[EM_Eloqua_Parametres]\nwhere [Tablename]='contacts' and [Instance]='EL01'",
+                        "queryTimeout": "02:00:00",
+                        "partitionOption": "None"
+                    },
+                    "dataset": {
+                        "referenceName": "AzureSynapseAnalytics_em_eloqua_param",
+                        "type": "DatasetReference"
+                    }
+                }
+            },
+            {
+                "name": "Set variable1_copy1",
+                "type": "SetVariable",
+                "dependsOn": [
+                    {
+                        "activity": "Lookup1",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "variableName": "lastdate",
+                    "value": {
+                        "value": "@string(activity('Lookup1').output.firstRow.last_modification_Date)\n",
+                        "type": "Expression"
+                    }
+                }
+            },
+            {
+                "name": "Wait2",
+                "type": "Wait",
+                "dependsOn": [
+                    {
+                        "activity": "Set variable9",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "waitTimeInSeconds": 100
+                }
+            }
+        ],
+        "variables": {
+            "Uri": {
+                "type": "String"
+            },
+            "UriSync": {
+                "type": "String"
+            },
+            "date": {
+                "type": "String"
+            },
+            "end of day": {
+                "type": "String"
+            },
+            "endof day final": {
+                "type": "String"
+            },
+            "id": {
+                "type": "String"
+            },
+            "VAR_URI": {
+                "type": "String"
+            },
+            "lastdate": {
+                "type": "String"
+            },
+            "syncuri": {
+                "type": "String"
+            },
+            "FinalUriSyncdata": {
+                "type": "String"
+            },
+            "TotalRecord": {
+                "type": "String"
+            },
+            "Offset1": {
+                "type": "String",
+                "defaultValue": "0"
+            },
+            "Offset": {
+                "type": "String",
+                "defaultValue": "0"
+            },
+            "erreur": {
+                "type": "String"
+            }
+        },
+        "folder": {
+            "name": "EM/ELOQUA/Contact"
+        },
+        "annotations": [],
+        "lastPublishTime": "2023-06-13T20:38:54Z"
+    },
+    "type": "Microsoft.Synapse/workspaces/pipelines"
+}

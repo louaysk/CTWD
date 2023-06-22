@@ -1,0 +1,124 @@
+{
+    "name": "Data Research",
+    "properties": {
+        "activities": [
+            {
+                "name": "DEV_DATA_RESEARCH",
+                "type": "ExecuteDataFlow",
+                "dependsOn": [
+                    {
+                        "activity": "ODS_Data_Research",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "dataflow": {
+                        "referenceName": "Load_DF_DEV_Research",
+                        "type": "DataFlowReference"
+                    },
+                    "staging": {
+                        "linkedService": {
+                            "referenceName": "dwtc-bi-WorkspaceDefaultStorage",
+                            "type": "LinkedServiceReference"
+                        },
+                        "folderPath": "dwtcfilestest/Staging storage"
+                    },
+                    "compute": {
+                        "coreCount": 8,
+                        "computeType": "General"
+                    },
+                    "traceLevel": "Fine"
+                }
+            },
+            {
+                "name": "LZ_DataResearch",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "LoadDataResearchFiles",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "Delete1",
+                "type": "Delete",
+                "dependsOn": [
+                    {
+                        "activity": "DEV_DATA_RESEARCH",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "dataset": {
+                        "referenceName": "DeleteLandingZoneDataResearch",
+                        "type": "DatasetReference"
+                    },
+                    "logStorageSettings": {
+                        "linkedServiceName": {
+                            "referenceName": "dwtc-bi-WorkspaceDefaultStorage",
+                            "type": "LinkedServiceReference"
+                        },
+                        "path": "dwtcfilestest/stg strg"
+                    },
+                    "enableLogging": true,
+                    "storeSettings": {
+                        "type": "AzureBlobFSReadSettings",
+                        "recursive": true,
+                        "wildcardFileName": "*.xlsx",
+                        "enablePartitionDiscovery": false
+                    }
+                }
+            },
+            {
+                "name": "ODS_Data_Research",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "LZ_DataResearch",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "LoadToODSDataResearch",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            }
+        ],
+        "folder": {
+            "name": "EM/DWH"
+        },
+        "annotations": [],
+        "lastPublishTime": "2023-06-13T00:54:05Z"
+    },
+    "type": "Microsoft.Synapse/workspaces/pipelines"
+}

@@ -1,0 +1,69 @@
+{
+    "name": "FACT_ORDERPRODUCT",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+            "type": "LinkedServiceReference",
+            "parameters": {
+                "DBName": "DWTC_DWH"
+            }
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [
+            {
+                "name": "Salesorderid",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Event_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "StatusCode",
+                "type": "nvarchar"
+            },
+            {
+                "name": "CreatedOn",
+                "type": "datetime",
+                "precision": 23,
+                "scale": 3
+            },
+            {
+                "name": "Amount_OrderProduct",
+                "type": "decimal",
+                "precision": 38,
+                "scale": 2
+            },
+            {
+                "name": "RequestorType",
+                "type": "nvarchar"
+            },
+            {
+                "name": "GlCode",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Barter",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Execution_Date",
+                "type": "datetime",
+                "precision": 23,
+                "scale": 3
+            },
+            {
+                "name": "Contact_GR_ID",
+                "type": "int",
+                "precision": 10
+            }
+        ],
+        "typeProperties": {
+            "schema": "EM_DWH",
+            "table": "FACT_ORDERPRODUCT"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

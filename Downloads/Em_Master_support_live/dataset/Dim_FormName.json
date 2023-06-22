@@ -1,0 +1,40 @@
+{
+    "name": "Dim_FormName",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "AzureBlobStorage1",
+            "type": "LinkedServiceReference"
+        },
+        "annotations": [],
+        "type": "Excel",
+        "typeProperties": {
+            "sheetName": "SQL script 108(3)",
+            "location": {
+                "type": "AzureBlobStorageLocation",
+                "fileName": "FormName.xlsx",
+                "folderPath": "Landing Zone/Eloqua/Dim_Form",
+                "container": "em-data"
+            },
+            "firstRowAsHeader": true
+        },
+        "schema": [
+            {
+                "name": "FormName",
+                "type": "String"
+            },
+            {
+                "name": "Instance",
+                "type": "String"
+            },
+            {
+                "name": "Count",
+                "type": "String"
+            },
+            {
+                "name": "Event Name",
+                "type": "String"
+            }
+        ]
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

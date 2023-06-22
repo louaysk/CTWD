@@ -1,0 +1,141 @@
+{
+    "name": "ODS_RESEARCH_PROJECT",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+            "type": "LinkedServiceReference",
+            "parameters": {
+                "DBName": "DWTC_DWH"
+            }
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [
+            {
+                "name": "Research_ID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Cluster",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Show",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Edition",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Project_Name",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Target_Audience",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Research_Type",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Data_Source",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Requested_By",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Project_Type",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Requested_Date",
+                "type": "date"
+            },
+            {
+                "name": "Status",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Completion_Date",
+                "type": "date"
+            },
+            {
+                "name": "Estimated_Records",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Total_Records_Received",
+                "type": "decimal",
+                "precision": 38,
+                "scale": 2
+            },
+            {
+                "name": "Research_Conducted_By",
+                "type": "nvarchar"
+            },
+            {
+                "name": "PR_Number",
+                "type": "nvarchar"
+            },
+            {
+                "name": "PO_Number",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Invoice_Number",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Quoted_Amount",
+                "type": "decimal",
+                "precision": 38,
+                "scale": 2
+            },
+            {
+                "name": "Invoiced_Amount",
+                "type": "decimal",
+                "precision": 38,
+                "scale": 2
+            },
+            {
+                "name": "VAT",
+                "type": "decimal",
+                "precision": 38,
+                "scale": 2
+            },
+            {
+                "name": "Total_Invoiced_Amount",
+                "type": "decimal",
+                "precision": 38,
+                "scale": 2
+            },
+            {
+                "name": "Currency",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Payment_Status",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Comments",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Execution_Date",
+                "type": "datetime",
+                "precision": 23,
+                "scale": 3
+            }
+        ],
+        "typeProperties": {
+            "schema": "ods",
+            "table": "EM_RESEARCH_PROJECT"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

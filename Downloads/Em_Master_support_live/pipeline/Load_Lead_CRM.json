@@ -1,0 +1,44 @@
+{
+    "name": "Load_Lead_CRM",
+    "properties": {
+        "activities": [
+            {
+                "name": "ODS_Lead",
+                "type": "ExecuteDataFlow",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "dataflow": {
+                        "referenceName": "Load_Lead_CRM",
+                        "type": "DataFlowReference"
+                    },
+                    "staging": {
+                        "linkedService": {
+                            "referenceName": "dwtc-bi-WorkspaceDefaultStorage",
+                            "type": "LinkedServiceReference"
+                        },
+                        "folderPath": "dwtcfilestest/Staging storage"
+                    },
+                    "compute": {
+                        "coreCount": 8,
+                        "computeType": "General"
+                    },
+                    "traceLevel": "Fine"
+                }
+            }
+        ],
+        "folder": {
+            "name": "EM/CRM"
+        },
+        "annotations": [],
+        "lastPublishTime": "2023-06-13T00:45:17Z"
+    },
+    "type": "Microsoft.Synapse/workspaces/pipelines"
+}

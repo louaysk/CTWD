@@ -1,0 +1,34 @@
+{
+    "name": "TreatedFiles",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultStorage",
+            "type": "LinkedServiceReference"
+        },
+        "parameters": {
+            "Filename": {
+                "type": "string"
+            },
+            "Folder": {
+                "type": "string"
+            }
+        },
+        "annotations": [],
+        "type": "Binary",
+        "typeProperties": {
+            "location": {
+                "type": "AzureBlobFSLocation",
+                "fileName": {
+                    "value": "@dataset().Filename",
+                    "type": "Expression"
+                },
+                "folderPath": {
+                    "value": "@concat('Treated Files/',dataset().Folder)",
+                    "type": "Expression"
+                },
+                "fileSystem": "em-data"
+            }
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

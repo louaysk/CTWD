@@ -1,0 +1,34 @@
+source(output(
+		IDSource as string,
+		Source as string,
+		Contact_GR_ID as integer,
+		Dateshow as date,
+		ShowName as string
+	),
+	allowSchemaDrift: true,
+	validateSchema: false,
+	isolationLevel: 'READ_UNCOMMITTED',
+	query: 'SELECT IDSource, Source, [Contact_GR_ID], Dateshow, [ShowName]\nFROM (\n    SELECT IDSource, Source, [Contact_GR_ID], Dateshow, [ShowName],\n    ROW_NUMBER() OVER (PARTITION BY [Contact_GR_ID], [ShowName] ORDER BY Dateshow DESC) AS rn\n    FROM (\n        SELECT visitor.[ID] as IdSource,\n        [Event_ID],\n        CAST(reg_Date AS DATE) as Dateshow,\n        [Contact_GR_ID],\n        \'REGISTRATION\' as Source\n        FROM [EM_DWH].[FACT_VISITOR_REGISTRATION] visitor\n        UNION ALL \n        SELECT CAST(DP.Research_ID as VARCHAR) as IdSource,\n        [Event_ID],\n        [Research_Date] as Dateshow,\n        [Contact_GR_ID],\n        \'RESEARCH\' as Source\n        FROM [EM_DWH].[FACT_DP_MEMBER] DP\n        LEFT JOIN EM_DWH.DIM_PROJECTS PRJ ON (DP.Research_ID= PRJ.Research_ID)\n        UNION ALL \n        SELECT CAST(Opportunity_ID as VARCHAR) as IdSource,\n        [Event_ID],\n        CAST([CreatedOn-Opportunity] as DATE) as Dateshow,\n        [Contact_GR_ID],\n        \'OPPORTUNITY\' as Source\n        FROM [EM_DWH].[DIM_OPPORTUNITY]\n      \n    ) AS a\n    LEFT JOIN [EM_DWH].[DIM_EVENT] event ON (a.[Event_ID]=event.event_id)\n) AS ranked_SHOW\nWHERE rn = 1 AND Contact_GR_ID IS NOT NULL',
+	format: 'query',
+	staged: true) ~> DimOpportunity
+DimOpportunity derive(Execution_Date = currentUTC()) ~> derivedColumn1
+derivedColumn1 sink(allowSchemaDrift: true,
+	validateSchema: false,
+	deletable:false,
+	insertable:true,
+	updateable:false,
+	upsertable:false,
+	truncate:true,
+	format: 'table',
+	staged: true,
+	skipDuplicateMapInputs: true,
+	skipDuplicateMapOutputs: true,
+	errorHandlingOption: 'stopOnFirstError',
+	mapColumn(
+		IDSource,
+		Source,
+		Contact_GR_ID,
+		Dateshow,
+		ShowName,
+		Execution_Date
+	)) ~> sink1

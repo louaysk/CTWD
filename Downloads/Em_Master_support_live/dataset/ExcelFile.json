@@ -1,0 +1,39 @@
+{
+    "name": "ExcelFile",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultStorage",
+            "type": "LinkedServiceReference"
+        },
+        "parameters": {
+            "Filename": {
+                "type": "string",
+                "defaultValue": "sarah.xlsx"
+            },
+            "Folder": {
+                "type": "string",
+                "defaultValue": "2019"
+            }
+        },
+        "annotations": [],
+        "type": "Excel",
+        "typeProperties": {
+            "location": {
+                "type": "AzureBlobFSLocation",
+                "fileName": {
+                    "value": "@dataset().Filename",
+                    "type": "Expression"
+                },
+                "folderPath": {
+                    "value": "@concat('Input Files/Post Show Data/',dataset().Folder)",
+                    "type": "Expression"
+                },
+                "fileSystem": "em-data"
+            },
+            "sheetIndex": 0,
+            "firstRowAsHeader": false
+        },
+        "schema": []
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

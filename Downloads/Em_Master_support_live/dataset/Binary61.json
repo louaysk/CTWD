@@ -1,0 +1,19 @@
+{
+    "name": "Binary61",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "AzureBlobStorage1",
+            "type": "LinkedServiceReference"
+        },
+        "annotations": [],
+        "type": "Binary",
+        "typeProperties": {
+            "location": {
+                "type": "AzureBlobStorageLocation",
+                "folderPath": "Landing Zone/Eloqua/Eloqua13/ActivityPageView",
+                "container": "em-data"
+            }
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

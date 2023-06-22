@@ -1,0 +1,20 @@
+{
+    "name": "Show_Preference",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+            "type": "LinkedServiceReference",
+            "parameters": {
+                "DBName": "DWTC_DWH"
+            }
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [],
+        "typeProperties": {
+            "schema": "EM_DWH",
+            "table": "FACT_ShowPreference"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

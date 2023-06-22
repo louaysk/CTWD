@@ -1,0 +1,173 @@
+{
+    "name": "DIM_PROPOSAL",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+            "type": "LinkedServiceReference",
+            "parameters": {
+                "DBName": "DWTC_DWH"
+            }
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [
+            {
+                "name": "Proposal_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "QuoteID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Opportunity_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "Amount-Quote",
+                "type": "decimal",
+                "precision": 38,
+                "scale": 2
+            },
+            {
+                "name": "Netsqm",
+                "type": "decimal",
+                "precision": 38,
+                "scale": 2
+            },
+            {
+                "name": "StatusCode",
+                "type": "bigint",
+                "precision": 19
+            },
+            {
+                "name": "CreatedOn",
+                "type": "datetime",
+                "precision": 23,
+                "scale": 3
+            },
+            {
+                "name": "QuoteState",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Execution_Date",
+                "type": "datetime",
+                "precision": 23,
+                "scale": 3
+            },
+            {
+                "name": "Typeofcontract",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Paymentplan",
+                "type": "nvarchar"
+            },
+            {
+                "name": "RevisionID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Name",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Potentialcustomer",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Eventname",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Owner",
+                "type": "nvarchar"
+            },
+            {
+                "name": "EventSector",
+                "type": "nvarchar"
+            },
+            {
+                "name": "DiscountLevel",
+                "type": "nvarchar"
+            },
+            {
+                "name": "ReasonforDiscountRequest",
+                "type": "nvarchar"
+            },
+            {
+                "name": "AmendmentType",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Justification",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Description",
+                "type": "nvarchar"
+            },
+            {
+                "name": "TotalAEDDiscount",
+                "type": "decimal",
+                "precision": 38,
+                "scale": 2
+            },
+            {
+                "name": "TotalDiscount",
+                "type": "decimal",
+                "precision": 38,
+                "scale": 2
+            },
+            {
+                "name": "IsLatestDiscountApproved",
+                "type": "nvarchar"
+            },
+            {
+                "name": "ExpiredProductApproved",
+                "type": "nvarchar"
+            },
+            {
+                "name": "LatestBarterApproved",
+                "type": "nvarchar"
+            },
+            {
+                "name": "LatestOAFApproved",
+                "type": "nvarchar"
+            },
+            {
+                "name": "DiscountApprovalMemoStatus",
+                "type": "nvarchar"
+            },
+            {
+                "name": "ExpiredProductMemoStatus",
+                "type": "nvarchar"
+            },
+            {
+                "name": "BarterMemoStatus",
+                "type": "nvarchar"
+            },
+            {
+                "name": "OAFApprovalStatus",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Barter",
+                "type": "nvarchar"
+            },
+            {
+                "name": "CompanyID",
+                "type": "int",
+                "precision": 10
+            }
+        ],
+        "typeProperties": {
+            "schema": "EM_DWH",
+            "table": "DIM_PROPOSAL"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

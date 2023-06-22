@@ -1,0 +1,20 @@
+{
+    "name": "Dim_devDataResearch",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+            "type": "LinkedServiceReference",
+            "parameters": {
+                "DBName": "DWTC_DWH"
+            }
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [],
+        "typeProperties": {
+            "schema": "EM_DWH",
+            "table": "DEV_DATA_RESEARCH"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

@@ -1,0 +1,133 @@
+{
+    "name": "DIM_OPPORTUNITY",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+            "type": "LinkedServiceReference",
+            "parameters": {
+                "DBName": "DWTC_DWH"
+            }
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [
+            {
+                "name": "Opportunity_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "Event_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "Customer_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "Lead_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "OpportunityNumber",
+                "type": "nvarchar"
+            },
+            {
+                "name": "OpportunityId",
+                "type": "nvarchar"
+            },
+            {
+                "name": "StageCode",
+                "type": "nvarchar"
+            },
+            {
+                "name": "RequesterID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "AgentID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "DiscountAmount",
+                "type": "decimal",
+                "precision": 38,
+                "scale": 2
+            },
+            {
+                "name": "RequestorType",
+                "type": "nvarchar"
+            },
+            {
+                "name": "TotalAmountofOpportunity",
+                "type": "decimal",
+                "precision": 38,
+                "scale": 2
+            },
+            {
+                "name": "TradeAssocID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Status",
+                "type": "nvarchar"
+            },
+            {
+                "name": "CreatedOn-Opportunity",
+                "type": "nvarchar"
+            },
+            {
+                "name": "NetSQMofOpportunity",
+                "type": "decimal",
+                "precision": 38,
+                "scale": 2
+            },
+            {
+                "name": "RetainedY/N",
+                "type": "nvarchar"
+            },
+            {
+                "name": "OnwerID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "ProbabilityCode",
+                "type": "bigint",
+                "precision": 19
+            },
+            {
+                "name": "OpportunityClosingDate",
+                "type": "datetime",
+                "precision": 23,
+                "scale": 3
+            },
+            {
+                "name": "Execution_Date",
+                "type": "datetime",
+                "precision": 23,
+                "scale": 3
+            },
+            {
+                "name": "SourceName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "OwnerIdName",
+                "type": "varchar"
+            },
+            {
+                "name": "Contact_GR_ID",
+                "type": "int",
+                "precision": 10
+            }
+        ],
+        "typeProperties": {
+            "schema": "EM_DWH",
+            "table": "DIM_OPPORTUNITY"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

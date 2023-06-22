@@ -1,0 +1,128 @@
+{
+    "name": "Fact_Activity",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+            "type": "LinkedServiceReference",
+            "parameters": {
+                "DBName": "DWTC_DWH"
+            }
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [
+            {
+                "name": "ActivityId",
+                "type": "nvarchar"
+            },
+            {
+                "name": "ActivityType",
+                "type": "nvarchar"
+            },
+            {
+                "name": "AssetId",
+                "type": "nvarchar"
+            },
+            {
+                "name": "AssetName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "AssetType",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Campaign_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "Contact_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "CreatedAt",
+                "type": "datetime",
+                "precision": 23,
+                "scale": 3
+            },
+            {
+                "name": "EmailAddress",
+                "type": "nvarchar"
+            },
+            {
+                "name": "EmailDeploymentId",
+                "type": "nvarchar"
+            },
+            {
+                "name": "EmailRecipientId",
+                "type": "nvarchar"
+            },
+            {
+                "name": "ExternalId",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Instance",
+                "type": "nvarchar"
+            },
+            {
+                "name": "EmailClickedThruLink",
+                "type": "nvarchar"
+            },
+            {
+                "name": "EmailSendType",
+                "type": "nvarchar"
+            },
+            {
+                "name": "EmailWebLink",
+                "type": "nvarchar"
+            },
+            {
+                "name": "SubjectLine",
+                "type": "nvarchar"
+            },
+            {
+                "name": "VisitorId",
+                "type": "nvarchar"
+            },
+            {
+                "name": "FormSubmitSavedId",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Execution_Date",
+                "type": "datetime",
+                "precision": 23,
+                "scale": 3
+            },
+            {
+                "name": "Index",
+                "type": "nvarchar"
+            },
+            {
+                "name": "SmtpStatusCode",
+                "type": "nvarchar"
+            },
+            {
+                "name": "SmtpMessage",
+                "type": "nvarchar"
+            },
+            {
+                "name": "SmtpErrorCode",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Contact_GR_ID",
+                "type": "int",
+                "precision": 10
+            }
+        ],
+        "typeProperties": {
+            "schema": "EM_DWH",
+            "table": "FACT_ACTIVITY"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

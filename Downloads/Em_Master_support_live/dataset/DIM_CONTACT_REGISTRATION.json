@@ -1,0 +1,329 @@
+{
+    "name": "DIM_CONTACT_REGISTRATION",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+            "type": "LinkedServiceReference",
+            "parameters": {
+                "DBName": "DWTC_DWH"
+            }
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [
+            {
+                "name": "Contact_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "ID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Index",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Event_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "Country_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "FileName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Address_line_1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Address_line_2",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Address_line_3",
+                "type": "nvarchar"
+            },
+            {
+                "name": "AGE",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Bill_to-Address_line_1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Bill_to-Address_line_2",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Bill_to-Address_line_3",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Bill_to-City_of_Company",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Bill_to-Company_Name",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Bill_to-Country",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Bill_to-Designation",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Bill_to-First_Name",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Bill_to-Last_Name",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Bill_to-P.O._Box",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Bill_to-Postal_Code",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Bill_to-State",
+                "type": "nvarchar"
+            },
+            {
+                "name": "City_of_Company",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Company_Facebook",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Company_Instagram",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Company_Linkedin",
+                "type": "nvarchar"
+            },
+            {
+                "name": "CompanyName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Company_Snapchat",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Company_Twitter",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Company_Website",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Company_Youtube",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Country",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Data_Source",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Department",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Department_Other",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Designation",
+                "type": "nvarchar"
+            },
+            {
+                "name": "[DesignationLevel]",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Designation_Level_Other",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Email",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Email_1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Emirates_ID_Passport_No",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Fax_Number",
+                "type": "nvarchar"
+            },
+            {
+                "name": "FirstName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "FullName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Gender",
+                "type": "nvarchar"
+            },
+            {
+                "name": "JobFunction",
+                "type": "nvarchar"
+            },
+            {
+                "name": "LANGUAGE_COMM",
+                "type": "nvarchar"
+            },
+            {
+                "name": "LastName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Middle_Name",
+                "type": "nvarchar"
+            },
+            {
+                "name": "MobilePhone",
+                "type": "nvarchar"
+            },
+            {
+                "name": "MobilePhone2",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Nationality",
+                "type": "nvarchar"
+            },
+            {
+                "name": "P.O_Box",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Personal_Facebook",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Personal_Instagram",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Personal_LinkedIn",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Personal_Pinterest",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Personal_Snapchat",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Personal_Twitter",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Personal_YouTube",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Phone_Extn",
+                "type": "nvarchar"
+            },
+            {
+                "name": "PhoneNumber1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "PhoneNumber2",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Postal_Code",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Prefix",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Region",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Source",
+                "type": "nvarchar"
+            },
+            {
+                "name": "State",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Type_of_Data",
+                "type": "nvarchar"
+            },
+            {
+                "name": "UAE_Resedency_Emirate",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Reg_Date",
+                "type": "datetime",
+                "precision": 23,
+                "scale": 3
+            },
+            {
+                "name": "Contact_GR_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "Execution_Date",
+                "type": "datetime",
+                "precision": 23,
+                "scale": 3
+            },
+            {
+                "name": "DesignationLevel",
+                "type": "nvarchar"
+            },
+            {
+                "name": "GR_ID",
+                "type": "nvarchar"
+            }
+        ],
+        "typeProperties": {
+            "schema": "EM_DWH",
+            "table": "DEV_CONTACT_REGISTRATION"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

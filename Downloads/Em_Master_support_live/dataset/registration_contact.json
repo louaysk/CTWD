@@ -1,0 +1,20 @@
+{
+    "name": "registration_contact",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+            "type": "LinkedServiceReference",
+            "parameters": {
+                "DBName": "DWTC_DWH"
+            }
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [],
+        "typeProperties": {
+            "schema": "EM_DWH",
+            "table": "DIM_CONTACT_REGISTRATION"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

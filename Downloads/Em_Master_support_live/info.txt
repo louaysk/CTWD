@@ -1,0 +1,6 @@
+selected resource name:		Em_Master
+selected resource type:		pipeline
+workspace name:			dwtc-bi
+workspace location:		northeurope
+subscription id:		9055edf4-af7b-4eb2-ba80-dc3c642a4597
+time of download (UTC):		Thu, 22 Jun 2023 08:34:08 GMT

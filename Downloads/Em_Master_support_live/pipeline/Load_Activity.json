@@ -1,0 +1,97 @@
+{
+    "name": "Load_Activity",
+    "properties": {
+        "activities": [
+            {
+                "name": "LDZ Ods Activity",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Load Delta LZ ods activity",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "Fact_Activity",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "LDZ Ods Activity",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Fact_ACTIVITY",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "Script1",
+                "type": "Script",
+                "dependsOn": [
+                    {
+                        "activity": "Fact_Activity",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "linkedServiceName": {
+                    "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "DBName": "DWTC_DWH"
+                    }
+                },
+                "typeProperties": {
+                    "scripts": [
+                        {
+                            "type": "Query",
+                            "text": {
+                                "value": "UPDATE [ods].[EM_Eloqua_Parametres]\nset Entry_Date =CONVERT(datetime2, '@{variables('Date_Entry')}', 127)\nWHERE Tablename = 'activities';\n\n\n",
+                                "type": "Expression"
+                            }
+                        }
+                    ],
+                    "scriptBlockExecutionTimeout": "02:00:00"
+                }
+            }
+        ],
+        "variables": {
+            "Date_Entry": {
+                "type": "String"
+            },
+            "test": {
+                "type": "String",
+                "defaultValue": "\"\""
+            },
+            "test2": {
+                "type": "String"
+            }
+        },
+        "folder": {
+            "name": "EM/EM Master"
+        },
+        "annotations": [],
+        "lastPublishTime": "2023-06-19T09:34:10Z"
+    },
+    "type": "Microsoft.Synapse/workspaces/pipelines"
+}

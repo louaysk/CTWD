@@ -1,0 +1,45 @@
+parameters{
+	Item as string ("")
+}
+source(output(
+		body as (count as short, hasMore as boolean, items as (ActivityId as integer, ActivityType as string, AssetId as short, AssetName as string, AssetType as string, CRMCampaignId as string, CampaignId as short, CampaignName as string, ContactId as integer, CreatedAt as string, EmailAddress as string, EmailDeploymentId as short, EmailRecipientId as string, ExternalId as string, SmtpErrorCode as string, SmtpMessage as string, SmtpStatusCode as short)[], limit as short, offset as boolean, totalResults as integer),
+		headers as [string,string]
+	),
+	allowSchemaDrift: true,
+	validateSchema: false,
+	httpMethod: 'GET',
+	timeout: 30,
+	requestInterval: 0,
+	paginationRules: ['supportRFC5988' -> 'true'],
+	responseFormat: ['type' -> 'json', 'documentForm' -> 'singleDocument']) ~> source1
+source1 foldDown(unroll(body.items),
+	mapColumn(
+		ActivityId = body.items.ActivityId,
+		ActivityType = body.items.ActivityType,
+		AssetId = body.items.AssetId,
+		AssetName = body.items.AssetName,
+		AssetType = body.items.AssetType,
+		CRMCampaignId = body.items.CRMCampaignId,
+		CampaignId = body.items.CampaignId,
+		CampaignName = body.items.CampaignName,
+		ContactId = body.items.ContactId,
+		CreatedAt = body.items.CreatedAt,
+		EmailAddress = body.items.EmailAddress,
+		EmailDeploymentId = body.items.EmailDeploymentId,
+		EmailRecipientId = body.items.EmailRecipientId,
+		ExternalId = body.items.ExternalId,
+		SmtpErrorCode = body.items.SmtpErrorCode,
+		SmtpMessage = body.items.SmtpMessage,
+		SmtpStatusCode = body.items.SmtpStatusCode
+	),
+	skipDuplicateMapInputs: false,
+	skipDuplicateMapOutputs: false) ~> flatten1
+flatten1 derive(Instance = toString('EL06')) ~> derivedColumn1
+derivedColumn1 sink(allowSchemaDrift: true,
+	validateSchema: false,
+	partitionFileNames:[(concat('Activity_Bounceback_P', $Item,'.json'))],
+	skipDuplicateMapInputs: true,
+	skipDuplicateMapOutputs: true,
+	partitionBy('hash', 1),
+	preCommands: [],
+	postCommands: []) ~> sink1

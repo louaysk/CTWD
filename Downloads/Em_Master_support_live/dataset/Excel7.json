@@ -1,0 +1,31 @@
+{
+    "name": "Excel7",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultStorage",
+            "type": "LinkedServiceReference"
+        },
+        "parameters": {
+            "FileName": {
+                "type": "string"
+            }
+        },
+        "annotations": [],
+        "type": "Excel",
+        "typeProperties": {
+            "location": {
+                "type": "AzureBlobFSLocation",
+                "fileName": {
+                    "value": "@dataset().FileName",
+                    "type": "Expression"
+                },
+                "folderPath": "Landing Zone/Data Research/Data Research",
+                "fileSystem": "em-data"
+            },
+            "sheetIndex": 0,
+            "firstRowAsHeader": true
+        },
+        "schema": []
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

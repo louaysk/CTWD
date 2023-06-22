@@ -1,0 +1,23 @@
+{
+    "name": "AzureSynapseAnalyticsCampaign",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+            "type": "LinkedServiceReference",
+            "parameters": {
+                "DBName": {
+                    "value": "DWTC_DWH",
+                    "type": "Expression"
+                }
+            }
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [],
+        "typeProperties": {
+            "schema": "ods",
+            "table": "Em_Campaign"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

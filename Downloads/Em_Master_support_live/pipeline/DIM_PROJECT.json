@@ -1,0 +1,142 @@
+{
+    "name": "DIM_PROJECT",
+    "properties": {
+        "activities": [
+            {
+                "name": "DIM_Project",
+                "type": "ExecuteDataFlow",
+                "dependsOn": [
+                    {
+                        "activity": "ODS_Project",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "dataflow": {
+                        "referenceName": "DF_Load_Dim_Project",
+                        "type": "DataFlowReference"
+                    },
+                    "staging": {
+                        "linkedService": {
+                            "referenceName": "dwtc-bi-WorkspaceDefaultStorage",
+                            "type": "LinkedServiceReference"
+                        },
+                        "folderPath": "dwtcfilestest"
+                    },
+                    "compute": {
+                        "coreCount": 8,
+                        "computeType": "General"
+                    },
+                    "traceLevel": "Fine"
+                }
+            },
+            {
+                "name": "ODS_Project",
+                "type": "ExecuteDataFlow",
+                "dependsOn": [
+                    {
+                        "activity": "LZ_Project",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "dataflow": {
+                        "referenceName": "ODS_DataReasearchProjects df",
+                        "type": "DataFlowReference"
+                    },
+                    "staging": {
+                        "linkedService": {
+                            "referenceName": "dwtc-bi-WorkspaceDefaultStorage",
+                            "type": "LinkedServiceReference"
+                        },
+                        "folderPath": "dwtcfilestest/stg strg"
+                    },
+                    "compute": {
+                        "coreCount": 8,
+                        "computeType": "General"
+                    },
+                    "traceLevel": "Fine"
+                }
+            },
+            {
+                "name": "LZ_Project",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "LoadDataResearchProjectFiles",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "Delete1",
+                "type": "Delete",
+                "dependsOn": [
+                    {
+                        "activity": "DIM_Project",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "dataset": {
+                        "referenceName": "DeleteLandingZoneDataResearchProject",
+                        "type": "DatasetReference"
+                    },
+                    "logStorageSettings": {
+                        "linkedServiceName": {
+                            "referenceName": "dwtc-bi-WorkspaceDefaultStorage",
+                            "type": "LinkedServiceReference"
+                        },
+                        "path": "dwtcfilestest/stg strg"
+                    },
+                    "enableLogging": true,
+                    "storeSettings": {
+                        "type": "AzureBlobFSReadSettings",
+                        "recursive": true,
+                        "wildcardFileName": "*.xlsx",
+                        "enablePartitionDiscovery": false
+                    }
+                }
+            }
+        ],
+        "folder": {
+            "name": "EM/DWH"
+        },
+        "annotations": [],
+        "lastPublishTime": "2023-06-13T00:39:04Z"
+    },
+    "type": "Microsoft.Synapse/workspaces/pipelines"
+}

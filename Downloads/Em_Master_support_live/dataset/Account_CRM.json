@@ -1,0 +1,128 @@
+{
+    "name": "Account_CRM",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+            "type": "LinkedServiceReference",
+            "parameters": {
+                "DBName": "DWTC_DWH"
+            }
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [
+            {
+                "name": "CountryID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "CountryName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "SectorName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Name",
+                "type": "nvarchar"
+            },
+            {
+                "name": "IndustryName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "CompanyID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "SubIndustryID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "POBox",
+                "type": "nvarchar"
+            },
+            {
+                "name": "address1_line1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "address2_line2",
+                "type": "nvarchar"
+            },
+            {
+                "name": "statecode",
+                "type": "bigint",
+                "precision": 19
+            },
+            {
+                "name": "address1_postalcode",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Region",
+                "type": "nvarchar"
+            },
+            {
+                "name": "emailaddress1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "websiteurl",
+                "type": "nvarchar"
+            },
+            {
+                "name": "telephone2",
+                "type": "nvarchar"
+            },
+            {
+                "name": "dwtc_billingtosameasaddress1",
+                "type": "bit"
+            },
+            {
+                "name": "dwtc_billingcityname",
+                "type": "nvarchar"
+            },
+            {
+                "name": "dwtc_billingpostcodezipcode",
+                "type": "nvarchar"
+            },
+            {
+                "name": "dwtc_billingcountryname",
+                "type": "nvarchar"
+            },
+            {
+                "name": "dwtc_companyannualrev",
+                "type": "bigint",
+                "precision": 19
+            },
+            {
+                "name": "telephone1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "City",
+                "type": "nvarchar"
+            },
+            {
+                "name": "PrimaryContactID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "BillToContactName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Company_ID",
+                "type": "int",
+                "precision": 10
+            }
+        ],
+        "typeProperties": {
+            "schema": "ods",
+            "table": "EM_Account_CRM"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

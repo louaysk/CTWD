@@ -1,0 +1,65 @@
+{
+    "name": "Campaignwitheventname",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+            "type": "LinkedServiceReference",
+            "parameters": {
+                "DBName": "DWTC_DWH"
+            }
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [
+            {
+                "name": "Instance",
+                "type": "nvarchar"
+            },
+            {
+                "name": "product",
+                "type": "nvarchar"
+            },
+            {
+                "name": "startAt",
+                "type": "date"
+            },
+            {
+                "name": "endAt",
+                "type": "date"
+            },
+            {
+                "name": "ShowName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "EventStartDateCRM",
+                "type": "date"
+            },
+            {
+                "name": "dwtc_actualenddateCRM",
+                "type": "date"
+            },
+            {
+                "name": "id",
+                "type": "nvarchar"
+            },
+            {
+                "name": "campaignCategory",
+                "type": "nvarchar"
+            },
+            {
+                "name": "currentStatus",
+                "type": "nvarchar"
+            },
+            {
+                "name": "EventName",
+                "type": "nvarchar"
+            }
+        ],
+        "typeProperties": {
+            "schema": "ods",
+            "table": "campaignwith_eventname"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

@@ -1,0 +1,68 @@
+{
+    "name": "Dataflow47",
+    "properties": {
+        "type": "MappingDataFlow",
+        "typeProperties": {
+            "sources": [
+                {
+                    "dataset": {
+                        "referenceName": "DuplicatedContacts",
+                        "type": "DatasetReference"
+                    },
+                    "name": "DuplicatedContacts"
+                }
+            ],
+            "sinks": [
+                {
+                    "dataset": {
+                        "referenceName": "DuplicatedContacts",
+                        "type": "DatasetReference"
+                    },
+                    "name": "sink1"
+                }
+            ],
+            "transformations": [
+                {
+                    "name": "select1"
+                }
+            ],
+            "scriptLines": [
+                "source(output(",
+                "          email as string,",
+                "          soundex_name as string,",
+                "          max_modified_date as timestamp,",
+                "          Birth_Certif as timestamp,",
+                "          has_crm_contact as integer",
+                "     ),",
+                "     allowSchemaDrift: true,",
+                "     validateSchema: false,",
+                "     isolationLevel: 'READ_UNCOMMITTED',",
+                "     query: '     SELECT  email ,\\n         soundex_name,\\n         MAX(last_modified_date) AS max_modified_date,\\n         Min(last_modified_date) AS Birth_Certif,\\n         MAX(CASE WHEN source = \\'CRM\\' THEN 1 ELSE 0 END) AS has_crm_contact\\n  FROM  ods.all_contacts \\n  GROUP BY email , soundex_name',",
+                "     format: 'query',",
+                "     staged: true) ~> DuplicatedContacts",
+                "DuplicatedContacts select(mapColumn(",
+                "          email,",
+                "          soundex_name,",
+                "          max_modified_date,",
+                "          Birth_Certif,",
+                "          has_crm_contact",
+                "     ),",
+                "     skipDuplicateMapInputs: true,",
+                "     skipDuplicateMapOutputs: true) ~> select1",
+                "select1 sink(allowSchemaDrift: true,",
+                "     validateSchema: false,",
+                "     deletable:false,",
+                "     insertable:true,",
+                "     updateable:false,",
+                "     upsertable:false,",
+                "     truncate:true,",
+                "     format: 'table',",
+                "     staged: true,",
+                "     allowCopyCommand: true,",
+                "     skipDuplicateMapInputs: true,",
+                "     skipDuplicateMapOutputs: true,",
+                "     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+            ]
+        }
+    }
+}

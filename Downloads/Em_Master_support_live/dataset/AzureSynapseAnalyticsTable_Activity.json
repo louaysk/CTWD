@@ -1,0 +1,181 @@
+{
+    "name": "AzureSynapseAnalyticsTable_Activity",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+            "type": "LinkedServiceReference",
+            "parameters": {
+                "DBName": "DWTC_DWH"
+            }
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [
+            {
+                "name": "ActivityId",
+                "type": "nvarchar"
+            },
+            {
+                "name": "ActivityType",
+                "type": "nvarchar"
+            },
+            {
+                "name": "AssetId",
+                "type": "nvarchar"
+            },
+            {
+                "name": "AssetName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "AssetType",
+                "type": "nvarchar"
+            },
+            {
+                "name": "CRMCampaignId",
+                "type": "nvarchar"
+            },
+            {
+                "name": "CampaignId",
+                "type": "nvarchar"
+            },
+            {
+                "name": "CampaignName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "ContactId",
+                "type": "nvarchar"
+            },
+            {
+                "name": "CreatedAt",
+                "type": "nvarchar"
+            },
+            {
+                "name": "EmailAddress",
+                "type": "nvarchar"
+            },
+            {
+                "name": "EmailDeploymentId",
+                "type": "nvarchar"
+            },
+            {
+                "name": "EmailRecipientId",
+                "type": "nvarchar"
+            },
+            {
+                "name": "ExternalId",
+                "type": "nvarchar"
+            },
+            {
+                "name": "SmtpErrorCode",
+                "type": "nvarchar"
+            },
+            {
+                "name": "SmtpMessage",
+                "type": "nvarchar"
+            },
+            {
+                "name": "SmtpStatusCode",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Instance",
+                "type": "nvarchar"
+            },
+            {
+                "name": "CampaignResponseCreatedAt",
+                "type": "nvarchar"
+            },
+            {
+                "name": "EmailClickedThruLink",
+                "type": "nvarchar"
+            },
+            {
+                "name": "EmailSendType",
+                "type": "nvarchar"
+            },
+            {
+                "name": "EmailWebLink",
+                "type": "nvarchar"
+            },
+            {
+                "name": "IpAddress",
+                "type": "nvarchar"
+            },
+            {
+                "name": "MemberStatus",
+                "type": "nvarchar"
+            },
+            {
+                "name": "SubjectLine",
+                "type": "nvarchar"
+            },
+            {
+                "name": "VisitorExternalId",
+                "type": "nvarchar"
+            },
+            {
+                "name": "VisitorId",
+                "type": "nvarchar"
+            },
+            {
+                "name": "FormSubmitSavedId",
+                "type": "nvarchar"
+            },
+            {
+                "name": "RawData",
+                "type": "nvarchar"
+            },
+            {
+                "name": "IsWebTrackingOptedIn",
+                "type": "nvarchar"
+            },
+            {
+                "name": "LinkedToContactDate",
+                "type": "nvarchar"
+            },
+            {
+                "name": "PageViewSavedId",
+                "type": "nvarchar"
+            },
+            {
+                "name": "ReferrerUrl",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Url",
+                "type": "nvarchar"
+            },
+            {
+                "name": "WebVisitId",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Duration",
+                "type": "nvarchar"
+            },
+            {
+                "name": "FirstPageViewUrl",
+                "type": "nvarchar"
+            },
+            {
+                "name": "NumberOfPages",
+                "type": "nvarchar"
+            },
+            {
+                "name": "WebVisitSavedId",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Date_Execution",
+                "type": "nvarchar"
+            }
+        ],
+        "typeProperties": {
+            "schema": "ods",
+            "table": "Em_Activity"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

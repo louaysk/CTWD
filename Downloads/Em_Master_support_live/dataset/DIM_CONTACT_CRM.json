@@ -1,0 +1,159 @@
+{
+    "name": "DIM_CONTACT_CRM",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+            "type": "LinkedServiceReference",
+            "parameters": {
+                "DBName": "DWTC_DWH"
+            }
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [
+            {
+                "name": "Contact_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "Contact_Code",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Email",
+                "type": "nvarchar"
+            },
+            {
+                "name": "CompanyName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "FirstName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "LastName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "JobTitle",
+                "type": "nvarchar"
+            },
+            {
+                "name": "DesignationLevel",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Statecode",
+                "type": "nvarchar"
+            },
+            {
+                "name": "DateModified",
+                "type": "datetime",
+                "precision": 23,
+                "scale": 3
+            },
+            {
+                "name": "DateCreated",
+                "type": "datetime",
+                "precision": 23,
+                "scale": 3
+            },
+            {
+                "name": "MobilePhone",
+                "type": "nvarchar"
+            },
+            {
+                "name": "ContactType",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Contact_GR_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "Company_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "Execution_Date",
+                "type": "datetime",
+                "precision": 23,
+                "scale": 3
+            },
+            {
+                "name": "Nationality",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Jobfunction",
+                "type": "bigint",
+                "precision": 19
+            },
+            {
+                "name": "Emailaddress2",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Address1_line1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Address1_line2",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Cityname",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Address1_postalcode",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Country",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Createdby",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Modifiedby",
+                "type": "nvarchar"
+            },
+            {
+                "name": "GR_ID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Status",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Prefix",
+                "type": "nvarchar"
+            },
+            {
+                "name": "PhoneNumber1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "PhoneNumber2",
+                "type": "nvarchar"
+            },
+            {
+                "name": "MobilePhone2",
+                "type": "nvarchar"
+            }
+        ],
+        "typeProperties": {
+            "schema": "EM_DWH",
+            "table": "DEV_CONTACT_CRM"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

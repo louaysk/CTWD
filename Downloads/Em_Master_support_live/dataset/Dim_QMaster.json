@@ -1,0 +1,62 @@
+{
+    "name": "Dim_QMaster",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+            "type": "LinkedServiceReference",
+            "parameters": {
+                "DBName": "DWTC_DWH"
+            }
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [
+            {
+                "name": "Question_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "QID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "UAID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Display_Question",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Question",
+                "type": "nvarchar"
+            },
+            {
+                "name": "ALID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Answers_List",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Question_Type",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Question_ValueTypeNew",
+                "type": "nvarchar"
+            },
+            {
+                "name": "TypeNew",
+                "type": "nvarchar"
+            }
+        ],
+        "typeProperties": {
+            "schema": "EM_DWH",
+            "table": "DIM_QMASTER"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

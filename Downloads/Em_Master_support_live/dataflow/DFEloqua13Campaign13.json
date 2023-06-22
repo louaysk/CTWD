@@ -1,0 +1,134 @@
+{
+    "name": "DFEloqua13Campaign13",
+    "properties": {
+        "type": "MappingDataFlow",
+        "typeProperties": {
+            "sources": [
+                {
+                    "dataset": {
+                        "referenceName": "Eloqua13Campaign13",
+                        "type": "DatasetReference"
+                    },
+                    "name": "source1"
+                }
+            ],
+            "sinks": [
+                {
+                    "dataset": {
+                        "referenceName": "Json1244",
+                        "type": "DatasetReference"
+                    },
+                    "name": "sink1"
+                }
+            ],
+            "transformations": [
+                {
+                    "name": "flatten1"
+                },
+                {
+                    "name": "derivedColumn1"
+                },
+                {
+                    "name": "select1"
+                }
+            ],
+            "scriptLines": [
+                "parameters{",
+                "     Item as string (\"\")",
+                "}",
+                "source(output(",
+                "          body as (elements as (actualCost as double, adCampaignId as string, budgetedCost as double, campaignCategory as string, campaignClassification as string, campaignType as string, createdAt as integer, createdBy as short, crmId as string, currentStatus as string, depth as string, endAt as integer, fieldValues as (id as short, type as string, value as string)[], firstActivation as integer, folderId as short, id as short, isEmailMarketingCampaign as boolean, isIncludedInROI as boolean, isSyncedWithCRM as boolean, name as string, permissions as string[], product as string, referenceProduct as string, region as string, startAt as integer, type as string, updatedAt as integer, updatedBy as short)[], page as boolean, pageSize as short, total as short),",
+                "          headers as [string,string]",
+                "     ),",
+                "     allowSchemaDrift: true,",
+                "     validateSchema: false,",
+                "     httpMethod: 'GET',",
+                "     timeout: 30,",
+                "     requestInterval: 0,",
+                "     paginationRules: ['supportRFC5988' -> 'true'],",
+                "     responseFormat: ['type' -> 'json', 'documentForm' -> 'singleDocument']) ~> source1",
+                "source1 foldDown(unroll(body.elements),",
+                "     mapColumn(",
+                "          actualCost = body.elements.actualCost,",
+                "          adCampaignId = body.elements.adCampaignId,",
+                "          budgetedCost = body.elements.budgetedCost,",
+                "          campaignCategory = body.elements.campaignCategory,",
+                "          campaignClassification = body.elements.campaignClassification,",
+                "          campaignType = body.elements.campaignType,",
+                "          createdAt = body.elements.createdAt,",
+                "          createdBy = body.elements.createdBy,",
+                "          crmId = body.elements.crmId,",
+                "          currentStatus = body.elements.currentStatus,",
+                "          depth = body.elements.depth,",
+                "          endAt = body.elements.endAt,",
+                "          fieldValues = body.elements.fieldValues,",
+                "          firstActivation = body.elements.firstActivation,",
+                "          folderId = body.elements.folderId,",
+                "          id = body.elements.id,",
+                "          isEmailMarketingCampaign = body.elements.isEmailMarketingCampaign,",
+                "          isIncludedInROI = body.elements.isIncludedInROI,",
+                "          isSyncedWithCRM = body.elements.isSyncedWithCRM,",
+                "          name = body.elements.name,",
+                "          permissions = body.elements.permissions,",
+                "          product = body.elements.product,",
+                "          referenceProduct = body.elements.referenceProduct,",
+                "          region = body.elements.region,",
+                "          startAt = body.elements.startAt,",
+                "          type = body.elements.type,",
+                "          updatedAt = body.elements.updatedAt,",
+                "          updatedBy = body.elements.updatedBy,",
+                "          page = body.page,",
+                "          pageSize = body.pageSize,",
+                "          total = body.total",
+                "     ),",
+                "     skipDuplicateMapInputs: false,",
+                "     skipDuplicateMapOutputs: false) ~> flatten1",
+                "select1 derive(Instance = toString('EL13'),",
+                "          each(match(1==1), $$ = regexReplace(regexReplace(toString($$),`[\\n]`,''),`[\\r]`,''))) ~> derivedColumn1",
+                "flatten1 select(mapColumn(",
+                "          actualCost,",
+                "          adCampaignId,",
+                "          budgetedCost,",
+                "          campaignCategory,",
+                "          campaignClassification,",
+                "          campaignType,",
+                "          createdAt,",
+                "          createdBy,",
+                "          crmId,",
+                "          currentStatus,",
+                "          depth,",
+                "          endAt,",
+                "          fieldValues,",
+                "          firstActivation,",
+                "          folderId,",
+                "          id,",
+                "          isEmailMarketingCampaign,",
+                "          isIncludedInROI,",
+                "          isSyncedWithCRM,",
+                "          name,",
+                "          permissions,",
+                "          product,",
+                "          referenceProduct,",
+                "          region,",
+                "          startAt,",
+                "          type,",
+                "          updatedAt,",
+                "          updatedBy,",
+                "          page,",
+                "          pageSize,",
+                "          total",
+                "     ),",
+                "     skipDuplicateMapInputs: true,",
+                "     skipDuplicateMapOutputs: true) ~> select1",
+                "derivedColumn1 sink(allowSchemaDrift: true,",
+                "     validateSchema: false,",
+                "     partitionFileNames:[(concat('Campaign_P',$Item,'.json'))],",
+                "     skipDuplicateMapInputs: true,",
+                "     skipDuplicateMapOutputs: true,",
+                "     partitionBy('hash', 1),",
+                "     preCommands: [],",
+                "     postCommands: []) ~> sink1"
+            ]
+        }
+    }
+}

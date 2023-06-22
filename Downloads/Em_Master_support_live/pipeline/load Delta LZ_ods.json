@@ -1,0 +1,159 @@
+{
+    "name": "load Delta LZ_ods",
+    "properties": {
+        "activities": [
+            {
+                "name": "Delete From LZ to treated",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Max Modified date",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "copyContact",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": false
+                }
+            },
+            {
+                "name": "Load Landing zone all instances",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "load contact Landing zone all instances",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "Load ods",
+                "type": "ExecuteDataFlow",
+                "dependsOn": [
+                    {
+                        "activity": "Date_Execution",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "dataflow": {
+                        "referenceName": "Dataflow27_Delta",
+                        "type": "DataFlowReference",
+                        "parameters": {
+                            "Date_Entry": {
+                                "value": "'@{variables('Date_Entry')}'",
+                                "type": "Expression"
+                            }
+                        }
+                    },
+                    "staging": {
+                        "linkedService": {
+                            "referenceName": "dwtc-bi-WorkspaceDefaultStorage",
+                            "type": "LinkedServiceReference"
+                        },
+                        "folderPath": "dwtcfilestest/stg strg"
+                    },
+                    "compute": {
+                        "coreCount": 32,
+                        "computeType": "MemoryOptimized"
+                    },
+                    "traceLevel": "Fine"
+                }
+            },
+            {
+                "name": "Max Modified date",
+                "type": "ExecuteDataFlow",
+                "dependsOn": [
+                    {
+                        "activity": "Load ods",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 100,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "dataflow": {
+                        "referenceName": "maxmodified delta",
+                        "type": "DataFlowReference"
+                    },
+                    "staging": {
+                        "linkedService": {
+                            "referenceName": "dwtc-bi-WorkspaceDefaultStorage",
+                            "type": "LinkedServiceReference"
+                        },
+                        "folderPath": "dwtcfilestest/stg strg"
+                    },
+                    "compute": {
+                        "coreCount": 32,
+                        "computeType": "MemoryOptimized"
+                    },
+                    "traceLevel": "Fine"
+                }
+            },
+            {
+                "name": "Date_Execution",
+                "type": "SetVariable",
+                "dependsOn": [
+                    {
+                        "activity": "Load Landing zone all instances",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "variableName": "Date_Entry",
+                    "value": {
+                        "value": "@utcNow()",
+                        "type": "Expression"
+                    }
+                }
+            }
+        ],
+        "variables": {
+            "erreur": {
+                "type": "String"
+            },
+            "Date_Execution": {
+                "type": "String"
+            },
+            "Date_Entry": {
+                "type": "String"
+            }
+        },
+        "folder": {
+            "name": "EM/ELOQUA/Contact"
+        },
+        "annotations": [],
+        "lastPublishTime": "2023-06-13T01:10:13Z"
+    },
+    "type": "Microsoft.Synapse/workspaces/pipelines"
+}

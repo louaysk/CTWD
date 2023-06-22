@@ -1,0 +1,23 @@
+{
+    "now": "2023-06-22T08:34:08.203Z",
+    "perfNow": 1631686.800000012,
+    "diagnosticCorrelation": "81234487-f482-447c-9cf6-d4d13a2a77d3",
+    "source": "DownloadSupportFiles",
+    "environment": {
+        "productName": "a365",
+        "buildVersion": "23.0605.04",
+        "environmentType": 9,
+        "resourceName": "dwtc-bi",
+        "resourceRegion": "northeurope",
+        "resourceGroup": "Analytics",
+        "subscriptionId": "9055edf4-af7b-4eb2-ba80-dc3c642a4597",
+        "sessionId": "NOyC3",
+        "operationId": "YWnts",
+        "gitType": "live",
+        "loggingKey": false
+    },
+    "additionalInfo": {
+        "selectedResource": "Em_Master",
+        "selectedResourceType": "pipeline"
+    }
+}

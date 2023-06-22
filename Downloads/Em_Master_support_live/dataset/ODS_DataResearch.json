@@ -1,0 +1,127 @@
+{
+    "name": "ODS_DataResearch",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+            "type": "LinkedServiceReference",
+            "parameters": {
+                "DBName": "DWTC_DWH"
+            }
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [
+            {
+                "name": "Research_ID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "ProjectName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "CompanyName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "CompanyType",
+                "type": "nvarchar"
+            },
+            {
+                "name": "IndustryType",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Sub-IndustryType",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Prefix",
+                "type": "nvarchar"
+            },
+            {
+                "name": "FirstName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "LastName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Designation",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Email",
+                "type": "nvarchar"
+            },
+            {
+                "name": "EmailAddress2",
+                "type": "nvarchar"
+            },
+            {
+                "name": "PhoneNumber",
+                "type": "nvarchar"
+            },
+            {
+                "name": "MobilePhone",
+                "type": "nvarchar"
+            },
+            {
+                "name": "P.O_Box",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Address_line_1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Address_line_2",
+                "type": "nvarchar"
+            },
+            {
+                "name": "City",
+                "type": "nvarchar"
+            },
+            {
+                "name": "State",
+                "type": "nvarchar"
+            },
+            {
+                "name": "ZIP_Postal_Code",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Country",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Region",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Website",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Research_Date",
+                "type": "date"
+            },
+            {
+                "name": "Execution_Date",
+                "type": "datetime",
+                "precision": 23,
+                "scale": 3
+            },
+            {
+                "name": "Filename",
+                "type": "nvarchar"
+            }
+        ],
+        "typeProperties": {
+            "schema": "ods",
+            "table": "EM_DATA_RESEARCH"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

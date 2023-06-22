@@ -1,0 +1,32 @@
+{
+    "name": "Daily_Em_Trigger",
+    "properties": {
+        "annotations": [],
+        "runtimeState": "Started",
+        "pipelines": [
+            {
+                "pipelineReference": {
+                    "referenceName": "Em_Master",
+                    "type": "PipelineReference"
+                }
+            }
+        ],
+        "type": "ScheduleTrigger",
+        "typeProperties": {
+            "recurrence": {
+                "frequency": "Day",
+                "interval": 1,
+                "startTime": "2023-06-13T09:51:00",
+                "timeZone": "Arabian Standard Time",
+                "schedule": {
+                    "minutes": [
+                        0
+                    ],
+                    "hours": [
+                        23
+                    ]
+                }
+            }
+        }
+    }
+}

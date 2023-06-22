@@ -1,0 +1,57 @@
+{
+    "name": "load contact Landing zone all instances",
+    "properties": {
+        "activities": [
+            {
+                "name": "Load Landing zone and ods EL01",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "DeltaEloqua01ContactAPP",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "Load Landing zone and ods EL06",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Delta_Eloqua06ContactAPP",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "Load Landing zone and ods EL13",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Delta_Eloqua13Contact",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            }
+        ],
+        "variables": {
+            "lastdate": {
+                "type": "String"
+            }
+        },
+        "folder": {
+            "name": "EM/ELOQUA/Contact"
+        },
+        "annotations": [],
+        "lastPublishTime": "2023-06-13T01:09:44Z"
+    },
+    "type": "Microsoft.Synapse/workspaces/pipelines"
+}

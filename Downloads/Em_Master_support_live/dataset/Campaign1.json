@@ -1,0 +1,117 @@
+{
+    "name": "Campaign1",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "AzureBlobStorage1",
+            "type": "LinkedServiceReference"
+        },
+        "annotations": [],
+        "type": "Json",
+        "typeProperties": {
+            "location": {
+                "type": "AzureBlobStorageLocation",
+                "folderPath": "Landing Zone/Eloqua/Eloqua01/Campaign",
+                "container": "em-data"
+            }
+        },
+        "schema": {
+            "type": "object",
+            "properties": {
+                "actualCost": {
+                    "type": "string"
+                },
+                "adCampaignId": {
+                    "type": "string"
+                },
+                "budgetedCost": {
+                    "type": "string"
+                },
+                "campaignCategory": {
+                    "type": "string"
+                },
+                "campaignClassification": {
+                    "type": "string"
+                },
+                "campaignType": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "createdBy": {
+                    "type": "string"
+                },
+                "crmId": {
+                    "type": "string"
+                },
+                "currentStatus": {
+                    "type": "string"
+                },
+                "depth": {
+                    "type": "string"
+                },
+                "endAt": {
+                    "type": "string"
+                },
+                "fieldValues": {
+                    "type": "string"
+                },
+                "folderId": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "isEmailMarketingCampaign": {
+                    "type": "string"
+                },
+                "isIncludedInROI": {
+                    "type": "string"
+                },
+                "isSyncedWithCRM": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "permissions": {
+                    "type": "string"
+                },
+                "product": {
+                    "type": "string"
+                },
+                "referenceProduct": {
+                    "type": "string"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "startAt": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                },
+                "updatedBy": {
+                    "type": "string"
+                },
+                "page": {
+                    "type": "string"
+                },
+                "pageSize": {
+                    "type": "string"
+                },
+                "total": {
+                    "type": "string"
+                },
+                "Instance": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

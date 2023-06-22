@@ -1,0 +1,46 @@
+{
+    "name": "Load_ContactCRM",
+    "properties": {
+        "activities": [
+            {
+                "name": "Ods_ContactCRM",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Load_Contact_CRM",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "Dev_ContactCRM",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Ods_ContactCRM",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "DIM_CONTACT_CRM",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            }
+        ],
+        "folder": {
+            "name": "EM/EM Master"
+        },
+        "annotations": [],
+        "lastPublishTime": "2023-06-13T00:54:31Z"
+    },
+    "type": "Microsoft.Synapse/workspaces/pipelines"
+}

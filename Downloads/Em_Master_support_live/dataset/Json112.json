@@ -1,0 +1,84 @@
+{
+    "name": "Json112",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "AzureBlobStorage1",
+            "type": "LinkedServiceReference"
+        },
+        "annotations": [],
+        "type": "Json",
+        "typeProperties": {
+            "location": {
+                "type": "AzureBlobStorageLocation",
+                "folderPath": "Landing Zone/Eloqua/Eloqua13/ActivityPageView",
+                "container": "em-data"
+            }
+        },
+        "schema": {
+            "type": "object",
+            "properties": {
+                "ActivityId": {
+                    "type": "integer"
+                },
+                "ActivityType": {
+                    "type": "string"
+                },
+                "CRMCampaignId": {
+                    "type": "string"
+                },
+                "CampaignId": {
+                    "type": "boolean"
+                },
+                "CampaignName": {
+                    "type": "string"
+                },
+                "CampaignResponseCreatedAt": {
+                    "type": "string"
+                },
+                "ContactId": {
+                    "type": "integer"
+                },
+                "CreatedAt": {
+                    "type": "string"
+                },
+                "ExternalId": {
+                    "type": "string"
+                },
+                "IpAddress": {
+                    "type": "string"
+                },
+                "IsWebTrackingOptedIn": {
+                    "type": "string"
+                },
+                "LinkedToContactDate": {
+                    "type": "string"
+                },
+                "MemberStatus": {
+                    "type": "string"
+                },
+                "PageViewSavedId": {
+                    "type": "integer"
+                },
+                "ReferrerUrl": {
+                    "type": "string"
+                },
+                "Url": {
+                    "type": "string"
+                },
+                "VisitorExternalId": {
+                    "type": "string"
+                },
+                "VisitorId": {
+                    "type": "integer"
+                },
+                "WebVisitId": {
+                    "type": "integer"
+                },
+                "Instance": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

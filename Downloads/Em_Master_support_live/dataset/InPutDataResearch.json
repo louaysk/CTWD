@@ -1,0 +1,22 @@
+{
+    "name": "InPutDataResearch",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultStorage",
+            "type": "LinkedServiceReference"
+        },
+        "annotations": [],
+        "type": "Excel",
+        "typeProperties": {
+            "location": {
+                "type": "AzureBlobFSLocation",
+                "folderPath": "Input Files/Data Research/Data Research",
+                "fileSystem": "em-data"
+            },
+            "sheetIndex": 0,
+            "firstRowAsHeader": true
+        },
+        "schema": []
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

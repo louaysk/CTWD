@@ -1,0 +1,25 @@
+{
+    "name": "Eloqua13Campaign13",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "Eloqua13_API",
+            "type": "LinkedServiceReference"
+        },
+        "parameters": {
+            "Offset": {
+                "type": "string",
+                "defaultValue": "1"
+            }
+        },
+        "annotations": [],
+        "type": "RestResource",
+        "typeProperties": {
+            "relativeUrl": {
+                "value": "@concat('api/rest/2.0/assets/campaigns?depth=partial&page=',dataset().Offset)",
+                "type": "Expression"
+            }
+        },
+        "schema": []
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

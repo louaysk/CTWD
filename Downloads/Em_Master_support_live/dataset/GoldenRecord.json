@@ -1,0 +1,146 @@
+{
+    "name": "GoldenRecord",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+            "type": "LinkedServiceReference",
+            "parameters": {
+                "DBName": "DWTC_DWH"
+            }
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [
+            {
+                "name": "email",
+                "type": "nvarchar"
+            },
+            {
+                "name": "soundex_name",
+                "type": "nvarchar"
+            },
+            {
+                "name": "max_modified_date",
+                "type": "datetime2",
+                "scale": 7
+            },
+            {
+                "name": "Birth_Certif",
+                "type": "datetime2",
+                "scale": 7
+            },
+            {
+                "name": "has_crm_contact",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "DateCreated",
+                "type": "datetime2",
+                "scale": 7
+            },
+            {
+                "name": "Contact_Created_Source",
+                "type": "nvarchar"
+            },
+            {
+                "name": "FirstName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "LastName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "FullName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Company",
+                "type": "nvarchar"
+            },
+            {
+                "name": "addressline1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Addressline2",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Nationality",
+                "type": "nvarchar"
+            },
+            {
+                "name": "ZIP_Postal_Code",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Region",
+                "type": "nvarchar"
+            },
+            {
+                "name": "City",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Prefix",
+                "type": "nvarchar"
+            },
+            {
+                "name": "JobFunction",
+                "type": "bigint",
+                "precision": 19
+            },
+            {
+                "name": "ContactType",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Modifiedby",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Createdby",
+                "type": "nvarchar"
+            },
+            {
+                "name": "State",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Statuscode",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Globally_Unsubscribed",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Email_HardBounce",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Country",
+                "type": "nvarchar"
+            },
+            {
+                "name": "JobTitle",
+                "type": "nvarchar"
+            },
+            {
+                "name": "MobilePhone",
+                "type": "nvarchar"
+            },
+            {
+                "name": "SeniorityLevel",
+                "type": "nvarchar"
+            }
+        ],
+        "typeProperties": {
+            "schema": "EM_DWH",
+            "table": "GOLDENRECORD"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

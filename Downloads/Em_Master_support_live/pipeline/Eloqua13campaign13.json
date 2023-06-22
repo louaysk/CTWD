@@ -1,0 +1,182 @@
+{
+    "name": "Eloqua13campaign13",
+    "properties": {
+        "activities": [
+            {
+                "name": "Web1",
+                "type": "WebActivity",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "url": "https://secure.p04.eloqua.com/api/rest/2.0/assets/campaigns",
+                    "connectVia": {
+                        "referenceName": "AutoResolveIntegrationRuntime",
+                        "type": "IntegrationRuntimeReference"
+                    },
+                    "method": "GET",
+                    "authentication": {
+                        "type": "Basic",
+                        "username": {
+                            "value": "dwtc13\\dwtc.elq",
+                            "type": "Expression"
+                        },
+                        "password": {
+                            "type": "AzureKeyVaultSecret",
+                            "store": {
+                                "referenceName": "AzureKeyVault1",
+                                "type": "LinkedServiceReference"
+                            },
+                            "secretName": "PWD"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Set variable1",
+                "type": "SetVariable",
+                "dependsOn": [
+                    {
+                        "activity": "Web1",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "variableName": "TotalRecord",
+                    "value": {
+                        "value": "@string(activity('Web1').output.total)",
+                        "type": "Expression"
+                    }
+                }
+            },
+            {
+                "name": "ForEach1",
+                "type": "ForEach",
+                "dependsOn": [
+                    {
+                        "activity": "Set variable1",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "items": {
+                        "value": "@range(1,add(div(int(variables('TotalRecord')),1000),1))",
+                        "type": "Expression"
+                    },
+                    "isSequential": true,
+                    "activities": [
+                        {
+                            "name": "Data flow1",
+                            "type": "ExecuteDataFlow",
+                            "dependsOn": [],
+                            "policy": {
+                                "timeout": "0.12:00:00",
+                                "retry": 0,
+                                "retryIntervalInSeconds": 30,
+                                "secureOutput": false,
+                                "secureInput": false
+                            },
+                            "userProperties": [],
+                            "typeProperties": {
+                                "dataflow": {
+                                    "referenceName": "DFEloqua13Campaign13",
+                                    "type": "DataFlowReference",
+                                    "parameters": {
+                                        "Item": {
+                                            "value": "'@{item()}'",
+                                            "type": "Expression"
+                                        }
+                                    },
+                                    "datasetParameters": {
+                                        "source1": {
+                                            "Offset": {
+                                                "value": "@variables('Offset')",
+                                                "type": "Expression"
+                                            }
+                                        }
+                                    }
+                                },
+                                "compute": {
+                                    "coreCount": 16,
+                                    "computeType": "General"
+                                },
+                                "traceLevel": "Fine"
+                            }
+                        },
+                        {
+                            "name": "Set variable2",
+                            "type": "SetVariable",
+                            "dependsOn": [
+                                {
+                                    "activity": "Set variable3",
+                                    "dependencyConditions": [
+                                        "Succeeded"
+                                    ]
+                                }
+                            ],
+                            "userProperties": [],
+                            "typeProperties": {
+                                "variableName": "Offset",
+                                "value": {
+                                    "value": "@string(add(int(variables('Offset1')),1))",
+                                    "type": "Expression"
+                                }
+                            }
+                        },
+                        {
+                            "name": "Set variable3",
+                            "type": "SetVariable",
+                            "dependsOn": [
+                                {
+                                    "activity": "Data flow1",
+                                    "dependencyConditions": [
+                                        "Succeeded"
+                                    ]
+                                }
+                            ],
+                            "userProperties": [],
+                            "typeProperties": {
+                                "variableName": "Offset1",
+                                "value": {
+                                    "value": "@string(variables('Offset'))",
+                                    "type": "Expression"
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        ],
+        "variables": {
+            "TotalRecord": {
+                "type": "String"
+            },
+            "Offset": {
+                "type": "String",
+                "defaultValue": "1"
+            },
+            "Offset1": {
+                "type": "String",
+                "defaultValue": "0"
+            }
+        },
+        "folder": {
+            "name": "EM/ELOQUA/Campaign"
+        },
+        "annotations": [],
+        "lastPublishTime": "2023-06-13T20:34:08Z"
+    },
+    "type": "Microsoft.Synapse/workspaces/pipelines"
+}

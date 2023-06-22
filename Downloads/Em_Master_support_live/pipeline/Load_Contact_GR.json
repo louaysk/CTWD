@@ -1,0 +1,206 @@
+{
+    "name": "Load_Contact_GR",
+    "properties": {
+        "activities": [
+            {
+                "name": "Load_Contact_GR",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "DWH_Dim_Contact_GoldenRecord",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "UpdateCRM",
+                "type": "Script",
+                "dependsOn": [
+                    {
+                        "activity": "Load_Contact_GR",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "linkedServiceName": {
+                    "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "DBName": "DWTC_DWH"
+                    }
+                },
+                "typeProperties": {
+                    "scripts": [
+                        {
+                            "type": "Query",
+                            "text": "UPDATE crm \r\nSET crm.[Contact_GR_ID] = gr.[Contact_GR_ID]\r\nFROM [EM_DWH].[DEV_CONTACT_CRM] crm \r\nJOIN [EM_DWH].[DIM_CONTACT_GR] gr\r\nON crm.[GR_ID] = gr.[grid]"
+                        }
+                    ],
+                    "scriptBlockExecutionTimeout": "02:00:00"
+                }
+            },
+            {
+                "name": "UpdateELQ",
+                "type": "Script",
+                "dependsOn": [
+                    {
+                        "activity": "UpdateCRM",
+                        "dependencyConditions": [
+                            "Completed"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "linkedServiceName": {
+                    "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "DBName": "DWTC_DWH"
+                    }
+                },
+                "typeProperties": {
+                    "scripts": [
+                        {
+                            "type": "Query",
+                            "text": "UPDATE elq\nSET elq.[Contact_GR_ID] = gr.[Contact_GR_ID]\nFROM [EM_DWH].[DEV_CONTACT_ELQ] elq \nJOIN [EM_DWH].[DIM_CONTACT_GR] gr\nON elq.[GR_ID] = gr.[grid]"
+                        }
+                    ],
+                    "scriptBlockExecutionTimeout": "02:00:00"
+                }
+            },
+            {
+                "name": "UpdateRegistration",
+                "type": "Script",
+                "dependsOn": [
+                    {
+                        "activity": "UpdateELQ",
+                        "dependencyConditions": [
+                            "Completed"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "linkedServiceName": {
+                    "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "DBName": "DWTC_DWH"
+                    }
+                },
+                "typeProperties": {
+                    "scripts": [
+                        {
+                            "type": "Query",
+                            "text": "UPDATE Reg\r\nSET Reg.[Contact_GR_ID] = gr.[Contact_GR_ID]\r\nFROM [EM_DWH].[DEV_CONTACT_REGISTRATION]Reg \r\nJOIN [EM_DWH].[DIM_CONTACT_GR] gr\r\nON Reg.[GR_ID] = gr.[grid]"
+                        }
+                    ],
+                    "scriptBlockExecutionTimeout": "02:00:00"
+                }
+            },
+            {
+                "name": "UpdateLead",
+                "type": "Script",
+                "dependsOn": [
+                    {
+                        "activity": "UpdateRegistration",
+                        "dependencyConditions": [
+                            "Completed"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "linkedServiceName": {
+                    "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "DBName": "DWTC_DWH"
+                    }
+                },
+                "typeProperties": {
+                    "scripts": [
+                        {
+                            "type": "Query",
+                            "text": "UPDATE Leads\r\nSET leads.[Contact_GR_ID] = gr.[Contact_GR_ID]\r\nFROM [EM_DWH].[DIM_LEAD] Leads\r\nJOIN [EM_DWH].[DIM_CONTACT_GR] gr\r\nON leads.[GR_ID] = gr.[grid]"
+                        }
+                    ],
+                    "scriptBlockExecutionTimeout": "02:00:00"
+                }
+            },
+            {
+                "name": "UpdateDataResearch",
+                "type": "Script",
+                "dependsOn": [
+                    {
+                        "activity": "UpdateLead",
+                        "dependencyConditions": [
+                            "Completed"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "linkedServiceName": {
+                    "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "DBName": "DWTC_DWH"
+                    }
+                },
+                "typeProperties": {
+                    "scripts": [
+                        {
+                            "type": "Query",
+                            "text": "UPDATE DR\nSET DR.[Contact_GR_ID] = gr.[Contact_GR_ID]\nFROM [EM_DWH].[DEV_DATA_RESEARCH] DR\nJOIN [EM_DWH].[DIM_CONTACT_GR] gr\nON DR.[GR_ID] = gr.[grid]"
+                        }
+                    ],
+                    "scriptBlockExecutionTimeout": "02:00:00"
+                }
+            }
+        ],
+        "folder": {
+            "name": "EM/EM Master"
+        },
+        "annotations": [],
+        "lastPublishTime": "2023-06-13T00:54:34Z"
+    },
+    "type": "Microsoft.Synapse/workspaces/pipelines"
+}

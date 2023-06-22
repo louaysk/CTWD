@@ -1,0 +1,86 @@
+{
+    "name": "Load_Registration_Files",
+    "properties": {
+        "activities": [
+            {
+                "name": "LandingZone_CSVFiles",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "ForeachFolder",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "ODS_CSVFiles",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "LandingZone_CSVFiles",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "LoadToODSVisitors",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "DWH_DEV_Contact_Reg",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "ODS_CSVFiles",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "DIM_CONTACT_REGISTRATION",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "ODS_FACT_Brief_Marketing",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "LandingZone_CSVFiles",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Load_BriefMarketing",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            }
+        ],
+        "folder": {
+            "name": "EM/EM Master"
+        },
+        "annotations": [],
+        "lastPublishTime": "2023-06-13T01:08:00Z"
+    },
+    "type": "Microsoft.Synapse/workspaces/pipelines"
+}

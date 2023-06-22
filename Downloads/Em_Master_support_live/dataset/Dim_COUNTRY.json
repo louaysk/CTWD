@@ -1,0 +1,70 @@
+{
+    "name": "Dim_COUNTRY",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+            "type": "LinkedServiceReference",
+            "parameters": {
+                "DBName": "DWTC_DWH"
+            }
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [
+            {
+                "name": "Country_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "Country",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Country_Question_DomainID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Country_AnswerDomainID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "UAID-Country",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Country_Code",
+                "type": "nvarchar"
+            },
+            {
+                "name": "DWTC_region",
+                "type": "nvarchar"
+            },
+            {
+                "name": "UAID-Region",
+                "type": "nvarchar"
+            },
+            {
+                "name": "RegionDomainID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "UAID-Nationality",
+                "type": "nvarchar"
+            },
+            {
+                "name": "NationalityDomainID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "NationalityNew",
+                "type": "nvarchar"
+            }
+        ],
+        "typeProperties": {
+            "schema": "EM_DWH",
+            "table": "DIM_Country"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

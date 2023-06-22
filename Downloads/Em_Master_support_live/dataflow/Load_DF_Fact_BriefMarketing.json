@@ -1,0 +1,163 @@
+{
+    "name": "Load_DF_Fact_BriefMarketing",
+    "properties": {
+        "type": "MappingDataFlow",
+        "typeProperties": {
+            "sources": [
+                {
+                    "dataset": {
+                        "referenceName": "BriefMarketingODS",
+                        "type": "DatasetReference"
+                    },
+                    "name": "OdsBriefMarketing"
+                },
+                {
+                    "dataset": {
+                        "referenceName": "DimEvent",
+                        "type": "DatasetReference"
+                    },
+                    "name": "DimEvent"
+                },
+                {
+                    "dataset": {
+                        "referenceName": "Dim_QMaster",
+                        "type": "DatasetReference"
+                    },
+                    "name": "DimQmaster"
+                }
+            ],
+            "sinks": [
+                {
+                    "dataset": {
+                        "referenceName": "Fact_BriefMarketing",
+                        "type": "DatasetReference"
+                    },
+                    "name": "sink1"
+                }
+            ],
+            "transformations": [
+                {
+                    "name": "derivedColumn1"
+                },
+                {
+                    "name": "lookup1"
+                },
+                {
+                    "name": "select1"
+                },
+                {
+                    "name": "lookup2"
+                }
+            ],
+            "scriptLines": [
+                "source(output(",
+                "          FileName as string,",
+                "          QID as string,",
+                "          Type as string,",
+                "          UAID as string,",
+                "          Year as short,",
+                "          Question as string,",
+                "          EventName as string,",
+                "          Entry_Date as timestamp",
+                "     ),",
+                "     allowSchemaDrift: true,",
+                "     validateSchema: false,",
+                "     isolationLevel: 'READ_UNCOMMITTED',",
+                "     query: '  select *  from \\n  ODS.EM_BriefMarketing\\n   where  ([EventName] <> \\'DO NOT IMPORT\\' or [EventName] is null)',",
+                "     format: 'query',",
+                "     staged: true) ~> OdsBriefMarketing",
+                "source(output(",
+                "          Event_ID as integer,",
+                "          EventID as string,",
+                "          EventName as string,",
+                "          ShowName as string,",
+                "          ShowName2 as string,",
+                "          TypeID as long,",
+                "          EventStatus as long,",
+                "          EventStartDate as date,",
+                "          ShellScheme as decimal(38,2),",
+                "          SpecialStands as decimal(38,2),",
+                "          OutdoorSpaceOnly as decimal(38,2),",
+                "          SpaceOnlyAED as decimal(38,2),",
+                "          ShellSchemeSqm as decimal(38,2),",
+                "          SponsorshipAED as decimal(38,2),",
+                "          CorporateDeck as decimal(38,2),",
+                "          EventIDValue as string,",
+                "          ClusterName as string,",
+                "          Execution_Date as timestamp",
+                "     ),",
+                "     allowSchemaDrift: true,",
+                "     validateSchema: false,",
+                "     isolationLevel: 'READ_UNCOMMITTED',",
+                "     format: 'table',",
+                "     staged: true) ~> DimEvent",
+                "source(output(",
+                "          Question_ID as integer,",
+                "          QID as string,",
+                "          UAID as string,",
+                "          Display_Question as string,",
+                "          Question as string,",
+                "          ALID as string,",
+                "          Answers_List as string,",
+                "          Question_Type as string,",
+                "          Question_ValueTypeNew as string,",
+                "          TypeNew as string",
+                "     ),",
+                "     allowSchemaDrift: true,",
+                "     validateSchema: false,",
+                "     isolationLevel: 'READ_UNCOMMITTED',",
+                "     format: 'table',",
+                "     staged: true) ~> DimQmaster",
+                "lookup2 derive(ID = concat( OdsBriefMarketing@QID,'_',FileName, OdsBriefMarketing@QID),",
+                "          Execution_Date = currentUTC()) ~> derivedColumn1",
+                "OdsBriefMarketing, DimEvent lookup(upper(OdsBriefMarketing@EventName) == upper(DimEvent@EventName),",
+                "     multiple: false,",
+                "     pickup: 'any',",
+                "     broadcast: 'auto')~> lookup1",
+                "derivedColumn1 select(mapColumn(",
+                "          ID,",
+                "          FileName,",
+                "          QID = OdsBriefMarketing@QID,",
+                "          Type,",
+                "          Event_ID,",
+                "          Question_ID,",
+                "          UAID = OdsBriefMarketing@UAID,",
+                "          Year,",
+                "          Question = OdsBriefMarketing@Question,",
+                "          Execution_Date",
+                "     ),",
+                "     skipDuplicateMapInputs: true,",
+                "     skipDuplicateMapOutputs: true) ~> select1",
+                "lookup1, DimQmaster lookup(OdsBriefMarketing@QID == DimQmaster@QID,",
+                "     multiple: false,",
+                "     pickup: 'any',",
+                "     broadcast: 'auto')~> lookup2",
+                "select1 sink(allowSchemaDrift: true,",
+                "     validateSchema: false,",
+                "     deletable:false,",
+                "     insertable:true,",
+                "     updateable:false,",
+                "     upsertable:false,",
+                "     truncate:true,",
+                "     format: 'table',",
+                "     staged: true,",
+                "     allowCopyCommand: true,",
+                "     skipDuplicateMapInputs: true,",
+                "     skipDuplicateMapOutputs: true,",
+                "     errorHandlingOption: 'stopOnFirstError',",
+                "     mapColumn(",
+                "          ID,",
+                "          FileName,",
+                "          QID,",
+                "          Type,",
+                "          Event_ID,",
+                "          Question_ID,",
+                "          UAID,",
+                "          Year,",
+                "          Question,",
+                "          Execution_Date",
+                "     )) ~> sink1"
+            ]
+        }
+    }
+}

@@ -1,0 +1,400 @@
+{
+    "name": "FACT_VISITOR_REGISTRATION",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+            "type": "LinkedServiceReference",
+            "parameters": {
+                "DBName": "DWTC_DWH"
+            }
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [
+            {
+                "name": "Contact_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "ID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Index",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Event_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "FileName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "2PM_Attendance",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Attended",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Badge_Type",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Campaign",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Campaign_Source",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Cluster_Name",
+                "type": "nvarchar"
+            },
+            {
+                "name": "CONFERENCE_PACKAGE_FIRST_BOOKING",
+                "type": "nvarchar"
+            },
+            {
+                "name": "CONFERENCE_PACKAGE_SECOND_BOOKING",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Conference_Package_Third_Booking",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Cross_Over_Gates",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Cross_Over_Overall_Day",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Daily_Attendance",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Day_Selection",
+                "type": "nvarchar"
+            },
+            {
+                "name": "DTCM_BASKETS",
+                "type": "nvarchar"
+            },
+            {
+                "name": "DWTC_Booking_Platform",
+                "type": "nvarchar"
+            },
+            {
+                "name": "DWTC_CRM_ID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "EventID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Event_Year",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Exhibition_Halls",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Exhibition_Packages",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Exhibitor_Promo_Codes",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Exhibitor_Type",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Exhibitor_Account_ID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Exhibitor_Name",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Facial_Recognition",
+                "type": "nvarchar"
+            },
+            {
+                "name": "First_Booking_Paid_Packages",
+                "type": "nvarchar"
+            },
+            {
+                "name": "GATE_SCANNERS",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Gates",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Generic_Package_Code_Exhibition_Conference",
+                "type": "nvarchar"
+            },
+            {
+                "name": "ID_Verification",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Personal_Data_Consent",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Particulars_Given_Gov",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Majlis_Management",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Majlis_Nominating_Company",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Media_Geographical_Distribution",
+                "type": "nvarchar"
+            },
+            {
+                "name": "MEDIA_LANGUAGE",
+                "type": "nvarchar"
+            },
+            {
+                "name": "MEDIA_NAME",
+                "type": "nvarchar"
+            },
+            {
+                "name": "MEDIA_TYPE",
+                "type": "nvarchar"
+            },
+            {
+                "name": "MEDIA_TYPE_Other",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Medium",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Onsite_Stations",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Pass_Selection",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Pavilion",
+                "type": "nvarchar"
+            },
+            {
+                "name": "PAY_Currency",
+                "type": "nvarchar"
+            },
+            {
+                "name": "PAY_Mode",
+                "type": "nvarchar"
+            },
+            {
+                "name": "PAY_Mode_Pack_2",
+                "type": "nvarchar"
+            },
+            {
+                "name": "PAY_Mode_Pack_3",
+                "type": "nvarchar"
+            },
+            {
+                "name": "PAY_Type",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Payment_Channel",
+                "type": "nvarchar"
+            },
+            {
+                "name": "PAYMENT_CHOICE",
+                "type": "nvarchar"
+            },
+            {
+                "name": "PAYMENT_CHOICE_PACK_2",
+                "type": "nvarchar"
+            },
+            {
+                "name": "PAYMENT_CHOICE_PACK_3",
+                "type": "nvarchar"
+            },
+            {
+                "name": "PAYMENT_DETAILS",
+                "type": "nvarchar"
+            },
+            {
+                "name": "PAYMENT_DETAILS_PACK_2",
+                "type": "nvarchar"
+            },
+            {
+                "name": "PAYMENT_DETAILS_PACK_3",
+                "type": "nvarchar"
+            },
+            {
+                "name": "PAYMENT_STATUS",
+                "type": "nvarchar"
+            },
+            {
+                "name": "PAYMENT_STATUS_PACK_1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "PAYMENT_STATUS_PACK_2",
+                "type": "nvarchar"
+            },
+            {
+                "name": "PAYMENT_STATUS_PACK_3",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Pre_POP_Codes",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Promo_Code",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Promo_Code_Discount_Ticketing_Price",
+                "type": "nvarchar"
+            },
+            {
+                "name": "PS_Data",
+                "type": "nvarchar"
+            },
+            {
+                "name": "PUBL_FREQ",
+                "type": "nvarchar"
+            },
+            {
+                "name": "PUBL_FREQ_Other",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Publication",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Receipt_No",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Reg_hall",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Reg_hall_Other",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Reg_Number",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Reg_Type",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Reg_Type_Other",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Second_Booking_Paid_Packages",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Self_Reg_Area",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Sessions_Attendance",
+                "type": "nvarchar"
+            },
+            {
+                "name": "SHOW_NAME",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Stand_Number",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Student_ID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Terms_Conditions",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Ticket_Selection",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Upgrade",
+                "type": "nvarchar"
+            },
+            {
+                "name": "UTM_Values",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Verticals_Session",
+                "type": "nvarchar"
+            },
+            {
+                "name": "VISITOR_TYPE",
+                "type": "nvarchar"
+            },
+            {
+                "name": "VISITOR_TYPE_Other",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Reg_Date",
+                "type": "datetime",
+                "precision": 23,
+                "scale": 3
+            },
+            {
+                "name": "Execution_Date",
+                "type": "datetime",
+                "precision": 23,
+                "scale": 3
+            },
+            {
+                "name": "Contact_GR_ID",
+                "type": "int",
+                "precision": 10
+            }
+        ],
+        "typeProperties": {
+            "schema": "EM_DWH",
+            "table": "FACT_VISITOR_REGISTRATION"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

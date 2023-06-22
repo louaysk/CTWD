@@ -1,0 +1,323 @@
+{
+    "name": "Load Delta LZ ods activity",
+    "properties": {
+        "activities": [
+            {
+                "name": "ODS ACTIVITY EL01",
+                "type": "ExecuteDataFlow",
+                "dependsOn": [
+                    {
+                        "activity": "Execution_Time",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 2,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "dataflow": {
+                        "referenceName": "Delta ods1",
+                        "type": "DataFlowReference",
+                        "parameters": {
+                            "Date_execution": {
+                                "value": "'@{variables('Date_Execution')}'",
+                                "type": "Expression"
+                            }
+                        }
+                    },
+                    "staging": {
+                        "linkedService": {
+                            "referenceName": "dwtc-bi-WorkspaceDefaultStorage",
+                            "type": "LinkedServiceReference"
+                        },
+                        "folderPath": "dwtcfilestest/stg strg"
+                    },
+                    "compute": {
+                        "coreCount": 32,
+                        "computeType": "MemoryOptimized"
+                    },
+                    "traceLevel": "Fine"
+                }
+            },
+            {
+                "name": "Delta ods Activity06",
+                "type": "ExecuteDataFlow",
+                "dependsOn": [
+                    {
+                        "activity": "ODS ACTIVITY EL01",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 3,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "dataflow": {
+                        "referenceName": "Delta ods Activity06",
+                        "type": "DataFlowReference",
+                        "parameters": {
+                            "Date_Execution": {
+                                "value": "'@{variables('Date_Execution')}'",
+                                "type": "Expression"
+                            }
+                        }
+                    },
+                    "staging": {
+                        "linkedService": {
+                            "referenceName": "dwtc-bi-WorkspaceDefaultStorage",
+                            "type": "LinkedServiceReference"
+                        },
+                        "folderPath": "dwtcfilestest/stg strg"
+                    },
+                    "compute": {
+                        "coreCount": 32,
+                        "computeType": "MemoryOptimized"
+                    },
+                    "traceLevel": "Fine"
+                }
+            },
+            {
+                "name": "ODS ACTIVITY EL013",
+                "type": "ExecuteDataFlow",
+                "dependsOn": [
+                    {
+                        "activity": "Delta ods Activity06",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 3,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "dataflow": {
+                        "referenceName": "Delta ods1_copy2",
+                        "type": "DataFlowReference",
+                        "parameters": {
+                            "Date_Execution": {
+                                "value": "'@{variables('Date_Execution')}'",
+                                "type": "Expression"
+                            }
+                        }
+                    },
+                    "staging": {
+                        "linkedService": {
+                            "referenceName": "dwtc-bi-WorkspaceDefaultStorage",
+                            "type": "LinkedServiceReference"
+                        },
+                        "folderPath": "dwtcfilestest/stg strg"
+                    },
+                    "compute": {
+                        "coreCount": 32,
+                        "computeType": "MemoryOptimized"
+                    },
+                    "traceLevel": "Fine"
+                }
+            },
+            {
+                "name": "Max modified date EL01",
+                "type": "ExecuteDataFlow",
+                "dependsOn": [
+                    {
+                        "activity": "ODS ACTIVITY EL013",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 3,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "dataflow": {
+                        "referenceName": "Max DATE activity01",
+                        "type": "DataFlowReference"
+                    },
+                    "staging": {
+                        "linkedService": {
+                            "referenceName": "dwtc-bi-WorkspaceDefaultStorage",
+                            "type": "LinkedServiceReference"
+                        },
+                        "folderPath": "dwtcfilestest/stg strg"
+                    },
+                    "compute": {
+                        "coreCount": 32,
+                        "computeType": "MemoryOptimized"
+                    },
+                    "traceLevel": "Fine"
+                }
+            },
+            {
+                "name": "Max modified Date EL06",
+                "type": "ExecuteDataFlow",
+                "dependsOn": [
+                    {
+                        "activity": "Max modified date EL01",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 3,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "dataflow": {
+                        "referenceName": "Max DATE activityEL06",
+                        "type": "DataFlowReference"
+                    },
+                    "staging": {
+                        "linkedService": {
+                            "referenceName": "dwtc-bi-WorkspaceDefaultStorage",
+                            "type": "LinkedServiceReference"
+                        },
+                        "folderPath": "dwtcfilestest/stg strg"
+                    },
+                    "compute": {
+                        "coreCount": 32,
+                        "computeType": "MemoryOptimized"
+                    },
+                    "traceLevel": "Fine"
+                }
+            },
+            {
+                "name": "Max Modified DateEL13",
+                "type": "ExecuteDataFlow",
+                "dependsOn": [
+                    {
+                        "activity": "Max modified Date EL06",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 3,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "dataflow": {
+                        "referenceName": "Max DATE activityEL13",
+                        "type": "DataFlowReference"
+                    },
+                    "staging": {
+                        "linkedService": {
+                            "referenceName": "dwtc-bi-WorkspaceDefaultStorage",
+                            "type": "LinkedServiceReference"
+                        },
+                        "folderPath": "dwtcfilestest/stg strg"
+                    },
+                    "compute": {
+                        "coreCount": 32,
+                        "computeType": "MemoryOptimized"
+                    },
+                    "traceLevel": "Fine"
+                }
+            },
+            {
+                "name": "MoveFiles to treated LZ",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Max Modified DateEL13",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Move activities files treated",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "Load LZ delta",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Load ALL DELTA LZ",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true
+                }
+            },
+            {
+                "name": "Execution_Time",
+                "type": "SetVariable",
+                "dependsOn": [
+                    {
+                        "activity": "Load LZ delta",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "variableName": "Date_Execution",
+                    "value": {
+                        "value": "@utcNow()",
+                        "type": "Expression"
+                    }
+                }
+            }
+        ],
+        "variables": {
+            "Date_Execution": {
+                "type": "String"
+            },
+            "test": {
+                "type": "String"
+            },
+            "de": {
+                "type": "String"
+            }
+        },
+        "folder": {
+            "name": "EM/ELOQUA/Activity"
+        },
+        "annotations": [],
+        "lastPublishTime": "2023-06-19T09:34:00Z"
+    },
+    "type": "Microsoft.Synapse/workspaces/pipelines"
+}

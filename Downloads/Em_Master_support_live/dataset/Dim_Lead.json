@@ -1,0 +1,313 @@
+{
+    "name": "Dim_Lead",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+            "type": "LinkedServiceReference",
+            "parameters": {
+                "DBName": "DWTC_DWH"
+            }
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [
+            {
+                "name": "Lead_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "Event_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "Country_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "statecode",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Lead_Code",
+                "type": "nvarchar"
+            },
+            {
+                "name": "DateCreated",
+                "type": "datetime",
+                "precision": 23,
+                "scale": 3
+            },
+            {
+                "name": "createdbyname",
+                "type": "nvarchar"
+            },
+            {
+                "name": "LeadSourceName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "LeadSourceValue",
+                "type": "nvarchar"
+            },
+            {
+                "name": "LeadStatusReasonCode",
+                "type": "nvarchar"
+            },
+            {
+                "name": "LeadforSponsorship",
+                "type": "nvarchar"
+            },
+            {
+                "name": "LeadSourceType",
+                "type": "nvarchar"
+            },
+            {
+                "name": "FullName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "IndustryName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "DateModified",
+                "type": "datetime",
+                "precision": 23,
+                "scale": 3
+            },
+            {
+                "name": "OwnerID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "LeadQualityValue",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Execution_Date",
+                "type": "datetime",
+                "precision": 23,
+                "scale": 3
+            },
+            {
+                "name": "jobtitle",
+                "type": "nvarchar"
+            },
+            {
+                "name": "emailaddress2",
+                "type": "nvarchar"
+            },
+            {
+                "name": "MobilePhone2",
+                "type": "nvarchar"
+            },
+            {
+                "name": "MobilePhone",
+                "type": "nvarchar"
+            },
+            {
+                "name": "address1_line1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "address1_line2",
+                "type": "nvarchar"
+            },
+            {
+                "name": "dwtc_citylookupname",
+                "type": "nvarchar"
+            },
+            {
+                "name": "address1_postalcode",
+                "type": "nvarchar"
+            },
+            {
+                "name": "dwtc_regionname",
+                "type": "nvarchar"
+            },
+            {
+                "name": "firstname",
+                "type": "nvarchar"
+            },
+            {
+                "name": "lastname",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Email",
+                "type": "nvarchar"
+            },
+            {
+                "name": "modifiedby",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Last_Verified_Date",
+                "type": "datetime",
+                "precision": 23,
+                "scale": 3
+            },
+            {
+                "name": "CompanyName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Country",
+                "type": "nvarchar"
+            },
+            {
+                "name": "SourceName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "SourceType",
+                "type": "nvarchar"
+            },
+            {
+                "name": "City",
+                "type": "nvarchar"
+            },
+            {
+                "name": "State",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Prefix",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Channel",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Medium",
+                "type": "nvarchar"
+            },
+            {
+                "name": "CampaignID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "FormName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "TrackingID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "CampaignName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Web_Lead_Questionairesq1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Web_Lead_Questionairesq2",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Web_Lead_Questionairesq3",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Web_Lead_Questionairesq4",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Web_Lead_Questionairesq5",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Web_Lead_Questionairesq6",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Web_Lead_Questionairesq7",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Web_Lead_Questionairesq8",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Web_Lead_Questionairesq9",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Web_Lead_Questionaires10",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Web_Lead_Questionaires11",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Web_Lead_Questionaires12",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Web_Lead_Questionaires13",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Web_Lead_Questionaires14",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Web_Lead_Questionaires15",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Web_Lead_Questionaires16",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Web_Lead_Questionaires17",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Web_Lead_Questionaires18",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Web_Lead_Questionaires19",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Web_Lead_Questionaires20",
+                "type": "nvarchar"
+            },
+            {
+                "name": "GR_ID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Contact_GR_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "seniorityLevel",
+                "type": "nvarchar"
+            },
+            {
+                "name": "PhoneNumber1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "PhoneNumber2",
+                "type": "nvarchar"
+            }
+        ],
+        "typeProperties": {
+            "schema": "EM_DWH",
+            "table": "DIM_LEAD"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

@@ -1,0 +1,46 @@
+{
+    "name": "Fact_DP_Member",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+            "type": "LinkedServiceReference",
+            "parameters": {
+                "DBName": "DWTC_DWH"
+            }
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [
+            {
+                "name": "Research_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "Contact_GR_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "Company_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "Execution_Date",
+                "type": "datetime",
+                "precision": 23,
+                "scale": 3
+            },
+            {
+                "name": "Research_Date",
+                "type": "date"
+            }
+        ],
+        "typeProperties": {
+            "schema": "EM_DWH",
+            "table": "FACT_DP_MEMBER"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

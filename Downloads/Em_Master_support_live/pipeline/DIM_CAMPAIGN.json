@@ -1,0 +1,44 @@
+{
+    "name": "DIM_CAMPAIGN",
+    "properties": {
+        "activities": [
+            {
+                "name": "DIMCAMPAIGN",
+                "type": "ExecuteDataFlow",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "dataflow": {
+                        "referenceName": "Load_DF_Dim_Campaign",
+                        "type": "DataFlowReference"
+                    },
+                    "staging": {
+                        "linkedService": {
+                            "referenceName": "dwtc-bi-WorkspaceDefaultStorage",
+                            "type": "LinkedServiceReference"
+                        },
+                        "folderPath": "dwtcfilestest"
+                    },
+                    "compute": {
+                        "coreCount": 8,
+                        "computeType": "General"
+                    },
+                    "traceLevel": "Fine"
+                }
+            }
+        ],
+        "folder": {
+            "name": "EM/DWH"
+        },
+        "annotations": [],
+        "lastPublishTime": "2023-06-13T00:38:07Z"
+    },
+    "type": "Microsoft.Synapse/workspaces/pipelines"
+}

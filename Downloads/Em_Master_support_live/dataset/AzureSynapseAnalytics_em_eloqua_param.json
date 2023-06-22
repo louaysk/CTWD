@@ -1,0 +1,62 @@
+{
+    "name": "AzureSynapseAnalytics_em_eloqua_param",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+            "type": "LinkedServiceReference",
+            "parameters": {
+                "DBName": {
+                    "value": "DWTC_DWH",
+                    "type": "Expression"
+                }
+            }
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [
+            {
+                "name": "Tablename",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Username",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Instance",
+                "type": "nvarchar"
+            },
+            {
+                "name": "bodyexpdef",
+                "type": "nvarchar"
+            },
+            {
+                "name": "parsejson_expdef",
+                "type": "nvarchar"
+            },
+            {
+                "name": "parsejson_output_data",
+                "type": "nvarchar"
+            },
+            {
+                "name": "index",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Type",
+                "type": "varchar"
+            },
+            {
+                "name": "last_modification_Date",
+                "type": "datetime",
+                "precision": 23,
+                "scale": 3
+            }
+        ],
+        "typeProperties": {
+            "schema": "ods",
+            "table": "EM_Eloqua_Parametres"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

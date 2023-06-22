@@ -1,0 +1,80 @@
+{
+    "name": "FACT_SHOW_PREFERENCE",
+    "properties": {
+        "activities": [
+            {
+                "name": "showpreference",
+                "type": "ExecuteDataFlow",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "dataflow": {
+                        "referenceName": "DF_Load_FactShowPreference",
+                        "type": "DataFlowReference"
+                    },
+                    "staging": {
+                        "linkedService": {
+                            "referenceName": "dwtc-bi-WorkspaceDefaultStorage",
+                            "type": "LinkedServiceReference"
+                        },
+                        "folderPath": "dwtcfilestest/stg strg"
+                    },
+                    "compute": {
+                        "coreCount": 32,
+                        "computeType": "MemoryOptimized"
+                    },
+                    "traceLevel": "Fine"
+                }
+            },
+            {
+                "name": "Script1",
+                "type": "Script",
+                "dependsOn": [
+                    {
+                        "activity": "showpreference",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "linkedServiceName": {
+                    "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "DBName": "DWTC_DWH"
+                    }
+                },
+                "typeProperties": {
+                    "scripts": [
+                        {
+                            "type": "Query",
+                            "text": "INSERT INTO [EM_DWH].[FACT_ShowPreference]\n(\n    [ShowName],\n    [Execution_Date],\n    [Dateshow],\n    [Contact_GR_ID],\n    [Source],\n    [IDSource]\n)\nSELECT\n    CASE instance\n        WHEN 'EL01' THEN 'Gulfood'\n        WHEN 'EL06' THEN 'World Art Dubai'\n        WHEN 'EL13' THEN 'GITEX Global'\n    END AS showname,\n    GETDATE() AS execution_date,\n    DateModified AS Dateshow,\n    a.Contact_GR_ID,\n    'Contact ELQ' AS source,\n    contact_id AS IDSource \nFROM EM_DWH.DEV_CONTACT_ELQ a\nLEFT JOIN em_dwh.fact_showpreference b\n    ON a.Contact_GR_ID = b.Contact_GR_ID\nWHERE b.Contact_GR_ID IS NULL;\n"
+                        }
+                    ],
+                    "scriptBlockExecutionTimeout": "02:00:00"
+                }
+            }
+        ],
+        "folder": {
+            "name": "EM/DWH"
+        },
+        "annotations": [],
+        "lastPublishTime": "2023-06-13T00:40:17Z"
+    },
+    "type": "Microsoft.Synapse/workspaces/pipelines"
+}

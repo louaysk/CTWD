@@ -1,0 +1,75 @@
+{
+    "name": "Fact_VISTOR_MP",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+            "type": "LinkedServiceReference",
+            "parameters": {
+                "DBName": "DWTC_DWH"
+            }
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [
+            {
+                "name": "Event_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "Question_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "ID_Reg",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Index",
+                "type": "nvarchar"
+            },
+            {
+                "name": "FileName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "QID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Question",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Type",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Answers",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Execution_Date",
+                "type": "datetime",
+                "precision": 23,
+                "scale": 3
+            },
+            {
+                "name": "Contact_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "Contact_GR_ID",
+                "type": "int",
+                "precision": 10
+            }
+        ],
+        "typeProperties": {
+            "schema": "EM_DWH",
+            "table": "Fact_VISTOR_MARKETING_PREFERENCES"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

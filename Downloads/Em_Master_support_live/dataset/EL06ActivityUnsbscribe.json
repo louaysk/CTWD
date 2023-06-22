@@ -1,0 +1,29 @@
+{
+    "name": "EL06ActivityUnsbscribe",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "Eloqua6_API",
+            "type": "LinkedServiceReference"
+        },
+        "parameters": {
+            "Offset": {
+                "type": "string",
+                "defaultValue": "0"
+            },
+            "TEST": {
+                "type": "string",
+                "defaultValue": "/syncs/5194"
+            }
+        },
+        "annotations": [],
+        "type": "RestResource",
+        "typeProperties": {
+            "relativeUrl": {
+                "value": "@concat('api/bulk/2.0',dataset().TEST,'/data?limit=10000&offset=',dataset().Offset)",
+                "type": "Expression"
+            }
+        },
+        "schema": []
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

@@ -1,0 +1,20 @@
+{
+    "name": "BriefMarketingODS",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+            "type": "LinkedServiceReference",
+            "parameters": {
+                "DBName": "DWTC_DWH"
+            }
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [],
+        "typeProperties": {
+            "schema": "ODS",
+            "table": "EM_BriefMarketing"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

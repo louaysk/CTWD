@@ -1,0 +1,20 @@
+{
+    "name": "CRM_Contracts",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+            "type": "LinkedServiceReference",
+            "parameters": {
+                "DBName": "DWTC_DWH"
+            }
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [],
+        "typeProperties": {
+            "schema": "ods",
+            "table": "EM_Contracts_CRM"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

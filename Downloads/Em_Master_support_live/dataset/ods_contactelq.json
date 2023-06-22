@@ -1,0 +1,305 @@
+{
+    "name": "ods_contactelq",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+            "type": "LinkedServiceReference",
+            "parameters": {
+                "DBName": {
+                    "value": "DWTC_DWH",
+                    "type": "Expression"
+                }
+            }
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [
+            {
+                "name": "C_Address1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_Address2",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_Address3",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_Age_Group1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_BusPhone",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_City",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_Company",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_Company_Revenue1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_Company_Size1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_Company_Website1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_Country",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_DateCreated",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_DateModified",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_Designation1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_ElqPURLName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_FirstAndLastName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_FirstName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_Gender1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_IND_ID11",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_Industry1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_Job_Function1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_Job_Role1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_LastName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_MSCRMAccountID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_MSCRMContactID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_MSCRMLastCampaignID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_MSCRMLastCampaignName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_MSCRMLastCampaignStatus",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_MSCRMLeadID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_MSCRM_LeadRating",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_Middle_Name1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_MobilePhone",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_Nationality1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_Pavilion1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_Region1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_SFDCAccountID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_SFDCContactID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_SFDCLastCampaignID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_SFDCLastCampaignStatus",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_SFDCLeadID",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_Salesperson",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_Salutation",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_State_Prov",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_Territory",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_Title",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_Username1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_Zip_Postal",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_elqPURLName1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "ContactIDExt",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Contact_Id",
+                "type": "nvarchar"
+            },
+            {
+                "name": "EmailAddress",
+                "type": "nvarchar"
+            },
+            {
+                "name": "EmailFormat",
+                "type": "nvarchar"
+            },
+            {
+                "name": "IsBounced",
+                "type": "nvarchar"
+            },
+            {
+                "name": "IsSubscribed",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Instance",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_EmailDisplayName",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_Fax",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_Full_Name1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_IND_ID1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_Annual_Revenue1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_Date_of_Birth1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_Designation_Level1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_Lead_Status1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_List_Source1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_MSCRM_EmailOptOut",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_PAHB_URL1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_SFDC_EmailOptOut1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "C_URN_Number___Infosalons1",
+                "type": "nvarchar"
+            },
+            {
+                "name": "Index",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "Date_Execution",
+                "type": "nvarchar"
+            }
+        ],
+        "typeProperties": {
+            "schema": "ods",
+            "table": "Em_Contact"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

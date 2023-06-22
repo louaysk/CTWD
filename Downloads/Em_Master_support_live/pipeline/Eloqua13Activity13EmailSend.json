@@ -1,0 +1,440 @@
+{
+    "name": "Eloqua13Activity13EmailSend",
+    "properties": {
+        "activities": [
+            {
+                "name": "Web1",
+                "type": "WebActivity",
+                "dependsOn": [
+                    {
+                        "activity": "Wait1",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "url": {
+                        "value": "https://secure.p04.eloqua.com/api/bulk/2.0@{variables('syncpost')}/data",
+                        "type": "Expression"
+                    },
+                    "connectVia": {
+                        "referenceName": "AutoResolveIntegrationRuntime",
+                        "type": "IntegrationRuntimeReference"
+                    },
+                    "method": "GET",
+                    "authentication": {
+                        "type": "Basic",
+                        "username": {
+                            "value": "dwtc13\\dwtc.elq",
+                            "type": "Expression"
+                        },
+                        "password": {
+                            "type": "AzureKeyVaultSecret",
+                            "store": {
+                                "referenceName": "AzureKeyVault1",
+                                "type": "LinkedServiceReference"
+                            },
+                            "secretName": "PWD"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Set variable1",
+                "type": "SetVariable",
+                "dependsOn": [
+                    {
+                        "activity": "Web1",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "variableName": "TotalRecord",
+                    "value": {
+                        "value": "@string(activity('Web1').output.totalResults)",
+                        "type": "Expression"
+                    }
+                }
+            },
+            {
+                "name": "ForEach1",
+                "type": "ForEach",
+                "dependsOn": [
+                    {
+                        "activity": "Set variable1",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "items": {
+                        "value": "@range(1,add(div(int(variables('TotalRecord')),10000),1))",
+                        "type": "Expression"
+                    },
+                    "isSequential": true,
+                    "activities": [
+                        {
+                            "name": "Data flow1",
+                            "type": "ExecuteDataFlow",
+                            "dependsOn": [],
+                            "policy": {
+                                "timeout": "0.12:00:00",
+                                "retry": 2,
+                                "retryIntervalInSeconds": 60,
+                                "secureOutput": false,
+                                "secureInput": false
+                            },
+                            "userProperties": [],
+                            "typeProperties": {
+                                "dataflow": {
+                                    "referenceName": "DFEloqua13activityEmailSend",
+                                    "type": "DataFlowReference",
+                                    "parameters": {
+                                        "Item": {
+                                            "value": "'@{item()}'",
+                                            "type": "Expression"
+                                        }
+                                    },
+                                    "datasetParameters": {
+                                        "source1": {
+                                            "Offset": {
+                                                "value": "@variables('Offset')",
+                                                "type": "Expression"
+                                            },
+                                            "TEST": {
+                                                "value": "@variables('syncpost')",
+                                                "type": "Expression"
+                                            }
+                                        }
+                                    }
+                                },
+                                "compute": {
+                                    "coreCount": 32,
+                                    "computeType": "MemoryOptimized"
+                                },
+                                "traceLevel": "Fine"
+                            }
+                        },
+                        {
+                            "name": "Set variable2",
+                            "type": "SetVariable",
+                            "dependsOn": [
+                                {
+                                    "activity": "Set variable3",
+                                    "dependencyConditions": [
+                                        "Succeeded"
+                                    ]
+                                }
+                            ],
+                            "userProperties": [],
+                            "typeProperties": {
+                                "variableName": "Offset",
+                                "value": {
+                                    "value": "@string(add(int(variables('Offset1')),10000))",
+                                    "type": "Expression"
+                                }
+                            }
+                        },
+                        {
+                            "name": "Set variable3",
+                            "type": "SetVariable",
+                            "dependsOn": [
+                                {
+                                    "activity": "Data flow1",
+                                    "dependencyConditions": [
+                                        "Succeeded"
+                                    ]
+                                }
+                            ],
+                            "userProperties": [],
+                            "typeProperties": {
+                                "variableName": "Offset1",
+                                "value": {
+                                    "value": "@string(variables('Offset'))",
+                                    "type": "Expression"
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "Web2",
+                "type": "WebActivity",
+                "dependsOn": [
+                    {
+                        "activity": "Set variable6",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "url": {
+                        "value": "https://secure.p04.eloqua.com/api/bulk/2.0/activities/exports",
+                        "type": "Expression"
+                    },
+                    "connectVia": {
+                        "referenceName": "AutoResolveIntegrationRuntime",
+                        "type": "IntegrationRuntimeReference"
+                    },
+                    "method": "POST",
+                    "body": {
+                        "value": "{\n   \"name\":\"Form submit activity id export\",\n   \"fields\":{\n       \"ActivityType\":{{Activity.Type}},\n      \"ActivityId\":\"{{Activity.Id}}\",\n      \"CreatedAt\":\"{{Activity.CreatedAt}}\",\n      \"ContactId\":\"{{Activity.Contact.Id}}\",\n      \"AssetType\":\"{{Activity.Asset.Type}}\",\n      \"AssetId\": \"{{Activity.Asset.Id}}\",\n      \"AssetName\": \"{{Activity.Asset.Name}}\",\n      \"CampaignId\": \"{{Activity.Campaign.Id}}\",\n        \"ExternalId\": \"{{Activity.ExternalId}}\",\n        \"CRMCampaignId\": \"{{Activity.Campaign.Field(CRMCampaignId)}}\",\n        \"CampaignName\": \"{{Activity.Campaign.Field(CampaignName)}}\",\n        \"CampaignResponseCreatedAt\": \"{{Activity.CampaignResponse.CreatedAt}}\",\n        \"MemberStatus\": \"{{Activity.CampaignResponse.Field(MemberStatus)}}\",\n        \"EmailAddress\": \"{{Activity.Field(EmailAddress)}}\",\n        \"EmailRecipientId\": \"{{Activity.Field(EmailRecipientId)}}\",\n        \"SubjectLine\": \"{{Activity.Field(SubjectLine)}}\",\n        \"EmailWebLink\": \"{{Activity.Field(EmailWebLink)}}\",\n        \"EmailSendType\": \"{{Activity.Field(EmailSendType)}}\",\n        \"EmailDeploymentId\": \"{{Activity.Field(EmailDeploymentId)}}\"\n   },\n   \"filter\":\"'{{Activity.Type}}'='EmailSend' AND '{{Activity.CreatedAt}}'>'@{variables('lastdate')}'\"\n   \n} ",
+                        "type": "Expression"
+                    },
+                    "authentication": {
+                        "type": "Basic",
+                        "username": "dwtc13\\dwtc.elq",
+                        "password": {
+                            "type": "AzureKeyVaultSecret",
+                            "store": {
+                                "referenceName": "AzureKeyVault1",
+                                "type": "LinkedServiceReference"
+                            },
+                            "secretName": "PWD"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Set variable4",
+                "type": "SetVariable",
+                "dependsOn": [
+                    {
+                        "activity": "Web2",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "variableName": "expdef",
+                    "value": {
+                        "value": "@activity('Web2').output.uri",
+                        "type": "Expression"
+                    }
+                }
+            },
+            {
+                "name": "Web3",
+                "type": "WebActivity",
+                "dependsOn": [
+                    {
+                        "activity": "Set variable4",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "url": "https://secure.p04.eloqua.com/api/bulk/2.0/syncs",
+                    "connectVia": {
+                        "referenceName": "AutoResolveIntegrationRuntime",
+                        "type": "IntegrationRuntimeReference"
+                    },
+                    "method": "POST",
+                    "body": {
+                        "value": "{\n   \"syncedInstanceUri\" : \"@{variables('expdef')}\"\n}",
+                        "type": "Expression"
+                    },
+                    "authentication": {
+                        "type": "Basic",
+                        "username": "dwtc13\\dwtc.elq",
+                        "password": {
+                            "type": "AzureKeyVaultSecret",
+                            "store": {
+                                "referenceName": "AzureKeyVault1",
+                                "type": "LinkedServiceReference"
+                            },
+                            "secretName": "PWD"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Set variable5",
+                "type": "SetVariable",
+                "dependsOn": [
+                    {
+                        "activity": "Web3",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "variableName": "syncpost",
+                    "value": {
+                        "value": "@activity('Web3').output.uri",
+                        "type": "Expression"
+                    }
+                }
+            },
+            {
+                "name": "Web4",
+                "type": "WebActivity",
+                "dependsOn": [
+                    {
+                        "activity": "Set variable5",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "url": {
+                        "value": "https://secure.p04.eloqua.com/api/bulk/2.0@{variables('syncpost')}",
+                        "type": "Expression"
+                    },
+                    "connectVia": {
+                        "referenceName": "AutoResolveIntegrationRuntime",
+                        "type": "IntegrationRuntimeReference"
+                    },
+                    "method": "GET",
+                    "authentication": {
+                        "type": "Basic",
+                        "username": "dwtc13\\dwtc.elq",
+                        "password": {
+                            "type": "AzureKeyVaultSecret",
+                            "store": {
+                                "referenceName": "AzureKeyVault1",
+                                "type": "LinkedServiceReference"
+                            },
+                            "secretName": "PWD"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Wait1",
+                "type": "Wait",
+                "dependsOn": [
+                    {
+                        "activity": "Web4",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "waitTimeInSeconds": 200
+                }
+            },
+            {
+                "name": "Lookup1",
+                "type": "Lookup",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "source": {
+                        "type": "SqlDWSource",
+                        "sqlReaderQuery": "SELECT \n[last_modification_Date]\n FROM [ods].[EM_Eloqua_Parametres]\nwhere [Tablename]='activities' and [Instance]='EL13' and [Type]='EmailSend'",
+                        "queryTimeout": "02:00:00",
+                        "partitionOption": "None"
+                    },
+                    "dataset": {
+                        "referenceName": "AzureSynapseAnalytics_em_eloqua_param",
+                        "type": "DatasetReference"
+                    }
+                }
+            },
+            {
+                "name": "Set variable6",
+                "type": "SetVariable",
+                "dependsOn": [
+                    {
+                        "activity": "Lookup1",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "variableName": "lastdate",
+                    "value": {
+                        "value": "@string(activity('Lookup1').output.firstRow.last_modification_Date)\n",
+                        "type": "Expression"
+                    }
+                }
+            }
+        ],
+        "variables": {
+            "TotalRecord": {
+                "type": "String"
+            },
+            "Offset": {
+                "type": "String",
+                "defaultValue": "0"
+            },
+            "Offset1": {
+                "type": "String",
+                "defaultValue": "0"
+            },
+            "expdef": {
+                "type": "String"
+            },
+            "syncpost": {
+                "type": "String"
+            },
+            "lastdate": {
+                "type": "String"
+            }
+        },
+        "folder": {
+            "name": "EM/ELOQUA/Activity13"
+        },
+        "annotations": [],
+        "lastPublishTime": "2023-06-16T11:26:58Z"
+    },
+    "type": "Microsoft.Synapse/workspaces/pipelines"
+}

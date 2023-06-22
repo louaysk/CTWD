@@ -1,0 +1,26 @@
+{
+    "name": "Eloqua13_API",
+    "type": "Microsoft.Synapse/workspaces/linkedservices",
+    "properties": {
+        "annotations": [],
+        "type": "RestService",
+        "typeProperties": {
+            "url": "https://secure.p04.eloqua.com",
+            "enableServerCertificateValidation": true,
+            "authenticationType": "Basic",
+            "userName": "dwtc13\\dwtc.elq",
+            "password": {
+                "type": "AzureKeyVaultSecret",
+                "store": {
+                    "referenceName": "AzureKeyVault1",
+                    "type": "LinkedServiceReference"
+                },
+                "secretName": "PWD"
+            }
+        },
+        "connectVia": {
+            "referenceName": "AutoResolveIntegrationRuntime",
+            "type": "IntegrationRuntimeReference"
+        }
+    }
+}

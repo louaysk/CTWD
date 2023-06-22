@@ -1,0 +1,212 @@
+{
+    "name": "Campaignmetricssink",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "dwtc-bi-WorkspaceDefaultSqlServer",
+            "type": "LinkedServiceReference",
+            "parameters": {
+                "DBName": "DWTC_DWH"
+            }
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [
+            {
+                "name": "CampaignName",
+                "type": "varchar"
+            },
+            {
+                "name": "CampaignStartDate",
+                "type": "date"
+            },
+            {
+                "name": "CampaignCreatedByUser",
+                "type": "varchar"
+            },
+            {
+                "name": "CampaignMembers",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "NewLeads",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "TotalExternalActivities",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "TotalSends",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "TotalDelivered",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "TotalHardBouncebacks",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "TotalSoftBouncebacks",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "TotalBouncebacks",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "TotalOpens",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "TotalClickthroughs",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "TotalPossibleForwards",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "TotalUnsubscribesByEmail",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "UniqueOpens",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "UniqueClickthroughs",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "HardBouncebackRate",
+                "type": "float",
+                "precision": 15
+            },
+            {
+                "name": "SoftBouncebackRate",
+                "type": "float",
+                "precision": 15
+            },
+            {
+                "name": "BouncebackRate",
+                "type": "float",
+                "precision": 15
+            },
+            {
+                "name": "OpenRate",
+                "type": "float",
+                "precision": 15
+            },
+            {
+                "name": "ClickthroughRate",
+                "type": "float",
+                "precision": 15
+            },
+            {
+                "name": "ClickToOpenRate",
+                "type": "float",
+                "precision": 15
+            },
+            {
+                "name": "PossibleForwardRate",
+                "type": "float",
+                "precision": 15
+            },
+            {
+                "name": "UnsubscribedRate",
+                "type": "float",
+                "precision": 15
+            },
+            {
+                "name": "UniqueOpenRate",
+                "type": "float",
+                "precision": 15
+            },
+            {
+                "name": "UniqueClickthroughRate",
+                "type": "float",
+                "precision": 15
+            },
+            {
+                "name": "TotalVisitors",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "UniqueVisitors",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "UniquePageViews",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "LandingPageViews",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "LandingPageTime",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "AvgLandingPageTime",
+                "type": "float",
+                "precision": 15
+            },
+            {
+                "name": "TotalFormSubmissions",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "UniqueFormSubmissions",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "FormSubmissionRate",
+                "type": "float",
+                "precision": 15
+            },
+            {
+                "name": "Campaign_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "Event_ID",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "Instance",
+                "type": "nvarchar"
+            }
+        ],
+        "typeProperties": {
+            "schema": "EM_DWH",
+            "table": "FACT_CAMPAIGN_METRICS"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}
